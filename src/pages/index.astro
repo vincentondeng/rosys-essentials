@@ -4,14 +4,30 @@ import PackageCards from '../components/PackageCards.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
 import DeliveryBanner from '../components/DeliveryBanner.astro';
 import CtaBand from '../components/CtaBand.astro';
+import site from '../data/site.json';
+
+// Structured data so search engines understand who we are and where we deliver
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: Astro.site?.href,
+  logo: new URL('/apple-touch-icon.png', Astro.site).href,
+  description:
+    'Kenyan supplier of ready-packed dignity kits — sanitary pads, underwear and personal care items — for NGOs, schools and community organizations.',
+  areaServed: { '@type': 'Country', name: 'Kenya' },
+  email: site.emailLink,
+};
 
 const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based organizations', 'Women & girls programs'];
 ---
 
 <BaseLayout
-  title="Sanitary Pads Supplier Kenya | Dignity Kits for NGOs"
-  description="Rosy's Essentials supplies ready-packed dignity kits — sanitary pads, underwear and personal care items — to NGOs, schools and community organizations in bulk, with delivery anywhere in Kenya."
+  title="Sanitary Pads & Dignity Kits Supplier in Kenya"
+  description="Sanitary pads supplier in Kenya: ready-packed dignity kits for NGOs, schools and community groups. Bulk orders, custom kits, delivery anywhere in Kenya."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(organization)} />
+
   <!-- Hero -->
   <section class="hero">
     <div class="container hero__inner">

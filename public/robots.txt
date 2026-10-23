@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# REPLACE the domain if the site is hosted somewhere else
+Sitemap: https://www.rosysessentials.co.ke/sitemap-index.xml
