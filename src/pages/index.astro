@@ -1,4 +1,5 @@
 ---
+import { url } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PackageCards from '../components/PackageCards.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
@@ -11,8 +12,8 @@ const organization = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: site.name,
-  url: Astro.site?.href,
-  logo: new URL('/apple-touch-icon.png', Astro.site).href,
+  url: new URL(url('/'), Astro.site).href,
+  logo: new URL(url('/apple-touch-icon.png'), Astro.site).href,
   description:
     'Kenyan supplier of ready-packed dignity kits — sanitary pads, underwear and personal care items — for NGOs, schools and community organizations.',
   areaServed: { '@type': 'Country', name: 'Kenya' },
@@ -39,8 +40,8 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
           organizations — in the quantities your program needs, delivered anywhere in Kenya.
         </p>
         <div class="btn-row">
-          <a class="btn btn--primary" href="/quote/">Request a Quote</a>
-          <a class="btn btn--secondary" href="/packages/">View packages</a>
+          <a class="btn btn--primary" href={url('/quote/')}>Request a Quote</a>
+          <a class="btn btn--secondary" href={url('/packages/')}>View packages</a>
         </div>
         <ul class="hero__facts">
           <li>Bulk orders with volume pricing</li>
@@ -50,7 +51,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
       </div>
       <figure class="hero__media">
         <img
-          src="/images/placeholders/hero.svg"
+          src={url('/images/placeholders/hero.svg')}
           alt="Placeholder: packed dignity kits ready for distribution"
           width="600"
           height="480"
@@ -84,7 +85,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
         </p>
         <p>
           Rosy's Essentials takes the sourcing, packing and delivery off your hands, so your team can focus on the people
-          you serve. <a href="/about/">Read our story</a>.
+          you serve. <a href={url('/about/')}>Read our story</a>.
         </p>
       </div>
     </div>

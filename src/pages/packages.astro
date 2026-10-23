@@ -1,4 +1,5 @@
 ---
+import { url } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PackageCompare from '../components/PackageCompare.astro';
 import DeliveryBanner from '../components/DeliveryBanner.astro';
@@ -33,7 +34,7 @@ const { items, tiers, custom } = packages;
       <h2 id="compare-title">Compare the kits</h2>
       <PackageCompare />
       <p class="note">
-        Prices depend on the package, quantity and delivery location. <a href="/quote/">Request a quote</a> and we'll
+        Prices depend on the package, quantity and delivery location. <a href={url('/quote/')}>Request a quote</a> and we'll
         send a tailored price for your order.
       </p>
     </div>
@@ -44,7 +45,7 @@ const { items, tiers, custom } = packages;
     <section id={tier.id} class:list={['section', 'tier', { 'section--tint': i % 2 === 0 }]} aria-labelledby={`${tier.id}-title`}>
       <div class:list={['container', 'tier__inner', { 'tier__inner--flip': i % 2 === 1 }]}>
         <figure class="tier__media">
-          <img src={tier.image} alt={tier.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
+          <img src={url(tier.image)} alt={tier.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
         </figure>
         <div class="tier__copy">
           {tier.popular && <p class="tier__badge">Most popular</p>}
@@ -75,7 +76,7 @@ const { items, tiers, custom } = packages;
             </div>
           </dl>
 
-          <a class="btn btn--primary" href={`/quote/?package=${tier.id}`}>
+          <a class="btn btn--primary" href={url(`/quote/?package=${tier.id}`)}>
             Request a Quote<span class="visually-hidden"> for the {tier.name} kit</span>
           </a>
         </div>
@@ -87,7 +88,7 @@ const { items, tiers, custom } = packages;
   <section id="custom" class="section tier" aria-labelledby="custom-title">
     <div class="container tier__inner tier__inner--flip">
       <figure class="tier__media">
-        <img src={custom.image} alt={custom.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
+        <img src={url(custom.image)} alt={custom.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
       </figure>
       <div class="tier__copy">
         <h2 id="custom-title">{custom.name}</h2>
@@ -96,7 +97,7 @@ const { items, tiers, custom } = packages;
           {custom.points.map((point) => <li>{point}</li>)}
         </ul>
         <p>Tell us about your program, the people you serve and your budget, and we'll propose a kit to match.</p>
-        <a class="btn btn--primary" href="/quote/?package=custom">Request a Custom Kit</a>
+        <a class="btn btn--primary" href={url('/quote/?package=custom')}>Request a Custom Kit</a>
       </div>
     </div>
   </section>

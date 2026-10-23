@@ -1,4 +1,5 @@
 ---
+import { url } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 
@@ -51,7 +52,7 @@ const testimonials = [
     <div class="container story">
       <figure class="story__media">
         <img
-          src="/images/placeholders/about-team.svg"
+          src={url('/images/placeholders/about-team.svg')}
           alt="Placeholder: photo of the Rosy's Essentials team packing kits"
           width="480"
           height="320"

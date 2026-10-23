@@ -1,4 +1,5 @@
 ---
+import { url } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 
@@ -83,7 +84,7 @@ const faqs = [
               </svg>
               <h2 class="step__title"><span class="visually-hidden">Step {i + 1}: </span>{step.title}</h2>
               <p>{step.text}</p>
-              {step.link && <a class="step__link" href={step.link.href}>{step.link.label} →</a>}
+              {step.link && <a class="step__link" href={url(step.link.href)}>{step.link.label} →</a>}
             </div>
           </li>
         ))}

@@ -1,5 +1,6 @@
 ---
 // Side-by-side comparison of the three tiers. All content comes from src/data/packages.json.
+import { url } from '../utils/url';
 import packages from '../data/packages.json';
 
 const { items, tiers } = packages;
@@ -49,7 +50,7 @@ const { items, tiers } = packages;
         <td></td>
         {tiers.map((tier) => (
           <td class:list={{ popular: tier.popular }}>
-            <a class="btn btn--primary" href={`/quote/?package=${tier.id}`}>
+            <a class="btn btn--primary" href={url(`/quote/?package=${tier.id}`)}>
               Request a Quote<span class="visually-hidden"> for the {tier.name} kit</span>
             </a>
           </td>

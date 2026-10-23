@@ -1,6 +1,7 @@
 ---
 // Shown after a quote request when JavaScript is off (Web3Forms redirects here).
 // With JavaScript on, the success message appears on the quote page itself.
+import { url } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 ---
@@ -16,8 +17,8 @@ import site from '../data/site.json';
       <p class="lead">We've received your request and will be in touch soon with a tailored quote.</p>
       <p>Need to add something? Call us on <a href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a>.</p>
       <div class="btn-row">
-        <a class="btn btn--primary" href="/packages/">Back to packages</a>
-        <a class="btn btn--secondary" href="/">Home</a>
+        <a class="btn btn--primary" href={url('/packages/')}>Back to packages</a>
+        <a class="btn btn--secondary" href={url('/')}>Home</a>
       </div>
     </div>
   </section>

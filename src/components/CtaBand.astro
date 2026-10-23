@@ -1,4 +1,5 @@
 ---
+import { url } from '../utils/url';
 interface Props {
   title?: string;
   text?: string;
@@ -16,8 +17,8 @@ const {
       <p>{text}</p>
     </div>
     <div class="btn-row">
-      <a class="btn cta__primary" href="/quote/">Request a Quote</a>
-      <a class="btn cta__secondary" href="/packages/">Compare packages</a>
+      <a class="btn cta__primary" href={url('/quote/')}>Request a Quote</a>
+      <a class="btn cta__secondary" href={url('/packages/')}>Compare packages</a>
     </div>
   </div>
 </section>

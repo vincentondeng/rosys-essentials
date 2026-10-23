@@ -1,4 +1,5 @@
 ---
+import { url } from '../utils/url';
 import Logo from './Logo.astro';
 import site from '../data/site.json';
 
@@ -23,11 +24,11 @@ const year = new Date().getFullYear();
     <div>
       <h2 class="site-footer__heading">Quick links</h2>
       <ul class="site-footer__list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/packages/">Packages</a></li>
-        <li><a href="/how-it-works/">How It Works</a></li>
-        <li><a href="/about/">About Us</a></li>
-        <li><a href="/quote/">Request a Quote</a></li>
+        <li><a href={url('/')}>Home</a></li>
+        <li><a href={url('/packages/')}>Packages</a></li>
+        <li><a href={url('/how-it-works/')}>How It Works</a></li>
+        <li><a href={url('/about/')}>About Us</a></li>
+        <li><a href={url('/quote/')}>Request a Quote</a></li>
       </ul>
     </div>
 

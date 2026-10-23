@@ -1,5 +1,6 @@
 ---
 // "Delivery anywhere in Kenya" — used on Home and Packages.
+import { url } from '../utils/url';
 ---
 
 <div class="delivery">
@@ -15,7 +16,7 @@
       Tell us where and when, and we plan the delivery around your program.
     </p>
   </div>
-  <a class="btn btn--primary" href="/quote/">Request a Quote</a>
+  <a class="btn btn--primary" href={url('/quote/')}>Request a Quote</a>
 </div>
 
 <style>

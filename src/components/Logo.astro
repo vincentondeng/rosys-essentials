@@ -1,12 +1,13 @@
 ---
 // PLACEHOLDER logo — a simple rose mark plus wordmark. Replace the SVG with the final logo when it is ready.
+import { url } from '../utils/url';
 interface Props {
   inverse?: boolean;
 }
 const { inverse = false } = Astro.props;
 ---
 
-<a href="/" class:list={['logo', { 'logo--inverse': inverse }]} aria-label="Rosy's Essentials — home">
+<a href={url('/')} class:list={['logo', { 'logo--inverse': inverse }]} aria-label="Rosy's Essentials — home">
   <svg class="logo__mark" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
     <path d="M20 5c7.2 0 12.5 5.4 12.5 12S27.2 30 20 30 7.5 23.6 7.5 17 12.8 5 20 5z" fill="#f2c9d4" />
     <path d="M20 10.5c4.2 0 7.3 2.9 7.3 6.7S24.2 24 20 24s-7.3-2.9-7.3-6.8" fill="none" stroke="#a8345a" stroke-width="2.2" stroke-linecap="round" />

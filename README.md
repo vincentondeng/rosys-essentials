@@ -218,6 +218,27 @@ Both options below are free. Either way, first push this folder to a GitHub repo
 
 From then on, every change pushed to GitHub redeploys the site automatically.
 
+### Demo on GitHub Pages
+
+A demo copy is published automatically to **<https://vincentondeng.github.io/rosys-essentials/>** by
+`.github/workflows/deploy.yml` on every push to `master`.
+
+- The demo build sets the `SITE_URL`, `BASE_PATH` and `DEMO_NOINDEX` environment variables, so links work under
+  `/rosys-essentials/` and search engines are told not to index it (it still shows placeholder content). Normal
+  builds, including Netlify and Vercel, are unaffected.
+- One-time setup: on GitHub, open the repo → **Settings → Pages** → **Source: GitHub Actions**. On a free GitHub
+  plan, the repo must be **public** for Pages to work.
+- To redeploy without changing code: **Actions** tab → *Deploy demo to GitHub Pages* → **Run workflow**.
+- When adding a new link or image path in the code, wrap it in `url()` (from `src/utils/url.ts`), for example
+  `href={url('/packages/')}`, so it works in both the demo and the real site.
+
+To try the demo build on your computer:
+
+```bash
+SITE_URL=https://vincentondeng.github.io BASE_PATH=/rosys-essentials npm run build
+SITE_URL=https://vincentondeng.github.io BASE_PATH=/rosys-essentials npm run preview   # → http://localhost:4321/rosys-essentials/
+```
+
 ### Custom domain (for example `rosysessentials.co.ke`)
 
 1. Buy the domain from a Kenyan registrar (`.co.ke` domains are managed through KENIC-accredited registrars).
