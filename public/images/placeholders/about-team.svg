@@ -1,0 +1,11 @@
+<!-- PLACEHOLDER image: replace with a real, compressed (WebP/JPG, ~120 KB) photo of the team or a packing day. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-label="Placeholder: team photo">
+  <rect width="480" height="320" fill="#f9e4ea"/>
+  <g fill="#ffffff" stroke="#a8345a" stroke-width="3">
+    <circle cx="170" cy="120" r="30"/><path d="M115 225c0-35 25-60 55-60s55 25 55 60z"/>
+    <circle cx="310" cy="120" r="30"/><path d="M255 225c0-35 25-60 55-60s55 25 55 60z"/>
+  </g>
+  <circle cx="240" cy="105" r="34" fill="#f2c9d4" stroke="#a8345a" stroke-width="3"/>
+  <path d="M178 230c0-40 28-68 62-68s62 28 62 68z" fill="#f2c9d4" stroke="#a8345a" stroke-width="3"/>
+  <text x="240" y="280" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#8a2849">PLACEHOLDER — REPLACE WITH PHOTO</text>
+</svg>

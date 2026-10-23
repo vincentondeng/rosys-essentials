@@ -1,0 +1,10 @@
+<!-- PLACEHOLDER image: replace with a real, compressed (WebP/JPG, ~100 KB) photo of the Basic kit. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-label="Placeholder: Basic kit">
+  <rect width="480" height="320" fill="#f9e4ea"/>
+  <rect x="150" y="80" width="180" height="150" rx="18" fill="#ffffff" stroke="#a8345a" stroke-width="3"/>
+  <path d="M150 120h180" stroke="#a8345a" stroke-width="3"/>
+  <rect x="222" y="108" width="36" height="24" rx="6" fill="#a8345a"/>
+  <text x="240" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#2d1a2a">Basic kit</text>
+  <text x="240" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#574152">Plain pouch</text>
+  <text x="240" y="275" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="2" fill="#8a2849">PLACEHOLDER — REPLACE WITH PHOTO</text>
+</svg>

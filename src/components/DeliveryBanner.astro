@@ -1,0 +1,61 @@
+---
+// "Delivery anywhere in Kenya" — used on Home and Packages.
+---
+
+<div class="delivery">
+  <svg class="delivery__icon" viewBox="0 0 48 48" width="56" height="56" aria-hidden="true" focusable="false">
+    <path d="M5 14h23v18H5zM28 20h8l6 6v6H28z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+    <circle cx="13" cy="34" r="4" fill="var(--rose-50)" stroke="currentColor" stroke-width="2.5" />
+    <circle cx="35" cy="34" r="4" fill="var(--rose-50)" stroke="currentColor" stroke-width="2.5" />
+  </svg>
+  <div class="delivery__text">
+    <h2>Delivery anywhere in Kenya</h2>
+    <p>
+      We deliver to all 47 counties — to your office, a school, a health facility or a community distribution point.
+      Tell us where and when, and we plan the delivery around your program.
+    </p>
+  </div>
+  <a class="btn btn--primary" href="/quote/">Request a Quote</a>
+</div>
+
+<style>
+  .delivery {
+    display: grid;
+    gap: 1rem;
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--rose-200);
+  }
+
+  .delivery__icon {
+    color: var(--rose-600);
+  }
+
+  .delivery__text h2 {
+    font-size: clamp(1.35rem, 4vw, 1.75rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .delivery__text p {
+    margin: 0;
+    color: var(--plum-700);
+  }
+
+  .delivery .btn {
+    justify-self: start;
+  }
+
+  @media (min-width: 768px) {
+    .delivery {
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.75rem;
+      padding: 2rem 2.25rem;
+    }
+
+    .delivery .btn {
+      justify-self: end;
+    }
+  }
+</style>

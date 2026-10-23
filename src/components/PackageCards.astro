@@ -1,0 +1,235 @@
+---
+// Summary cards for the three tiers + Custom Kit. All content comes from src/data/packages.json.
+import packages from '../data/packages.json';
+
+interface Props {
+  headingLevel?: 'h2' | 'h3';
+}
+const { headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+
+const tiers = packages.tiers.map((tier) => ({
+  ...tier,
+  lines: packages.items
+    .filter((item) => item.key !== 'packaging')
+    .map((item) => ({ label: item.label, value: tier.contents[item.key as keyof typeof tier.contents] }))
+    .filter((line) => line.value),
+}));
+const custom = packages.custom;
+---
+
+<div class="cards">
+  {tiers.map((tier) => (
+    <article class:list={['card', { 'card--popular': tier.popular }]} aria-labelledby={`card-${tier.id}`}>
+      {tier.popular && <p class="card__badge">Most popular</p>}
+      <img class="card__img" src={tier.image} alt={tier.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
+      <div class="card__body">
+        <Heading class="card__title" id={`card-${tier.id}`}>{tier.name}</Heading>
+        <p class="card__best">Best for: <strong>{tier.bestFor}</strong></p>
+        <p class="card__summary">{tier.summary}</p>
+        <ul class="card__list">
+          {tier.lines.map((line) => (
+            <li><span>{line.label}</span> <strong>{line.value}</strong></li>
+          ))}
+        </ul>
+        <p class="card__pack">{tier.contents.packaging}</p>
+        <div class="card__actions">
+          <a class="btn btn--primary btn--block" href={`/quote/?package=${tier.id}`}>
+            Request a Quote<span class="visually-hidden"> for the {tier.name} kit</span>
+          </a>
+          <a class="card__more" href={`/packages/#${tier.id}`}>
+            See full details<span class="visually-hidden"> of the {tier.name} kit</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  ))}
+
+  <article class="card card--custom" aria-labelledby="card-custom">
+    <div class="card__body">
+      <Heading class="card__title" id="card-custom">{custom.name}</Heading>
+      <p class="card__summary">{custom.summary}</p>
+      <ul class="card__ticks">
+        {custom.points.map((point) => <li>{point}</li>)}
+      </ul>
+      <div class="card__actions">
+        <a class="btn btn--secondary btn--block" href="/quote/?package=custom">Request a Custom Kit</a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<style>
+  .cards {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .card--popular {
+    border: 2px solid var(--rose-600);
+  }
+
+  .card__badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    margin: 0;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: var(--rose-600);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  /* Shorter images on phones keep the three cards from becoming a long scroll */
+  .card__img {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    background: var(--rose-100);
+  }
+
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.25rem;
+  }
+
+  .card__title {
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .card__best {
+    font-size: 0.9rem;
+    color: var(--plum-700);
+    margin-bottom: 0.75rem;
+  }
+
+  .card__summary {
+    margin-bottom: 1rem;
+  }
+
+  .card__list {
+    list-style: none;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .card__list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+
+  .card__list strong {
+    text-align: right;
+  }
+
+  .card__pack {
+    font-size: 0.9rem;
+    color: var(--plum-700);
+  }
+
+  .card__ticks {
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card__ticks li {
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card__ticks li::before {
+    content: '';
+    position: absolute;
+    left: 0.2rem;
+    top: 0.35em;
+    width: 0.45rem;
+    height: 0.8rem;
+    border: solid var(--rose-600);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .card__actions {
+    margin-top: auto;
+    display: grid;
+    gap: 0.5rem;
+    justify-items: center;
+    padding-top: 0.5rem;
+  }
+
+  .card__more {
+    padding: 0.5rem;
+    font-weight: 600;
+  }
+
+  .card--custom {
+    background: var(--rose-50);
+    border-style: dashed;
+    border-color: var(--rose-400);
+    box-shadow: none;
+  }
+
+  @media (min-width: 640px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card__img {
+      aspect-ratio: 3 / 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cards {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+
+    /* Custom Kit spans the full row beneath the three tiers */
+    .card--custom {
+      grid-column: 1 / -1;
+    }
+
+    .card--custom .card__body {
+      display: grid;
+      grid-template-columns: 9rem 1fr 1.2fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .card--custom .card__title,
+    .card--custom .card__summary,
+    .card--custom .card__ticks {
+      margin: 0;
+    }
+
+    .card--custom .card__actions {
+      margin: 0;
+      padding: 0;
+      min-width: 14rem;
+    }
+  }
+</style>

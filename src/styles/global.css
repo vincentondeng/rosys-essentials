@@ -1,0 +1,283 @@
+/* Rosy's Essentials — global styles. Mobile-first; larger screens are layered on with min-width queries. */
+
+:root {
+  /* Brand colours */
+  --rose-50: #fdf3f5;
+  --rose-100: #f9e4ea;
+  --rose-200: #f2c9d4;
+  --rose-400: #d97893;
+  --rose-600: #a8345a; /* primary actions — 6.4:1 with white */
+  --rose-700: #8a2849;
+  --plum-900: #2d1a2a; /* body text */
+  --plum-700: #574152; /* secondary text — 8.9:1 on white */
+  --white: #ffffff;
+  --line: #ead8de;
+  --whatsapp: #187a42; /* darker than brand green so the white label passes contrast */
+
+  /* Type & spacing */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgb(45 26 42 / 6%), 0 4px 16px rgb(45 26 42 / 6%);
+  --container: 1120px;
+  --gutter: 1.25rem;
+  --header-h: 4rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--plum-900);
+  background: var(--white);
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+  color: var(--plum-900);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--rose-700);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--rose-600);
+}
+
+:focus-visible {
+  outline: 3px solid var(--rose-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Layout helpers */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: 3rem;
+}
+
+.section--tint {
+  background: var(--rose-50);
+}
+
+.section__intro {
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.section__intro p {
+  color: var(--plum-700);
+  font-size: 1.05rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rose-700);
+  margin-bottom: 0.5rem;
+}
+
+.lead {
+  font-size: 1.125rem;
+  color: var(--plum-700);
+}
+
+.section--tight {
+  padding-block: 2.5rem;
+}
+
+/* Inner-page heading band */
+.page-head {
+  background: linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
+  padding-block: 2.5rem 1rem;
+}
+
+.page-head .lead {
+  max-width: 40rem;
+}
+
+/* Checkmark list */
+.ticks {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.ticks li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0.2rem;
+  top: 0.35em;
+  width: 0.45rem;
+  height: 0.8rem;
+  border: solid var(--rose-600);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.7rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--rose-600);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background: var(--rose-700);
+  color: var(--white);
+}
+
+.btn--secondary {
+  background: var(--white);
+  color: var(--rose-700);
+  border-color: var(--rose-600);
+}
+
+.btn--secondary:hover {
+  background: var(--rose-50);
+  color: var(--rose-700);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* Clearly marked placeholder content for the owner to replace */
+.placeholder-note {
+  font-size: 0.8rem;
+  color: var(--plum-700);
+  font-style: italic;
+}
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--plum-900);
+  color: var(--white);
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: var(--white);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2rem;
+    --header-h: 4.5rem;
+  }
+
+  .section {
+    padding-block: 4.5rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .page-head {
+    padding-block: 4rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

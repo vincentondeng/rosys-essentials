@@ -1,0 +1,122 @@
+---
+import Logo from './Logo.astro';
+import site from '../data/site.json';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <Logo inverse />
+      <p>Ready-packed dignity kits for NGOs, schools, faith-based groups and community organizations.</p>
+      <p class="site-footer__delivery">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          <circle cx="7" cy="17.5" r="1.8" fill="currentColor" />
+          <circle cx="17" cy="17.5" r="1.8" fill="currentColor" />
+        </svg>
+        Delivering across Kenya — all 47 counties
+      </p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__heading">Quick links</h2>
+      <ul class="site-footer__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/packages/">Packages</a></li>
+        <li><a href="/how-it-works/">How It Works</a></li>
+        <li><a href="/about/">About Us</a></li>
+        <li><a href="/quote/">Request a Quote</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__heading">Contact us</h2>
+      <ul class="site-footer__list">
+        <li><a href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a></li>
+        <li><a href={`mailto:${site.emailLink}`}>{site.email}</a></li>
+        <li>{site.address}</li>
+        <li>{site.hours}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>&copy; {year} {site.name}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--plum-900);
+    color: #eadde5;
+    padding-block: 3rem 5.5rem; /* extra bottom space so the WhatsApp button never covers text */
+    font-size: 0.95rem;
+  }
+
+  .site-footer a {
+    color: #ffffff;
+  }
+
+  .site-footer a:hover {
+    color: var(--rose-200);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .site-footer__brand p {
+    margin-top: 1rem;
+    max-width: 22rem;
+  }
+
+  .site-footer__delivery {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .site-footer__heading {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rose-200);
+    margin-bottom: 0.75rem;
+  }
+
+  .site-footer__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer__bottom {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(255 255 255 / 15%);
+    font-size: 0.85rem;
+  }
+
+  .site-footer__bottom p {
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .site-footer {
+      padding-bottom: 3rem;
+    }
+
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1.2fr;
+      gap: 3rem;
+    }
+  }
+</style>

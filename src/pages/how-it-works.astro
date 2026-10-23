@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const steps = [
+  {
+    title: 'Choose a package or request a custom kit',
+    text: 'Pick Basic, Essential or Premium — or tell us what your program needs and we’ll design a custom kit with the right items, quantities and branding.',
+    link: { href: '/packages/', label: 'Compare packages' },
+    icon: 'M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8',
+  },
+  {
+    title: 'Receive your quote',
+    text: 'Send us your package, quantity and delivery location. We reply with a tailored quote based on your order size — larger orders benefit from volume pricing.',
+    link: { href: '/quote/', label: 'Request a quote' },
+    icon: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6',
+  },
+  {
+    title: 'We pack and deliver anywhere in Kenya',
+    text: 'Once you approve the quote, we pack every kit and deliver to your office, school or distribution point — in any of Kenya’s 47 counties.',
+    link: null,
+    icon: 'M3 7h11v9H3zM14 10h4l3 3v3h-7zM7 19.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6zM17 19.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z',
+  },
+];
+
+const checklist = [
+  'Which package you’d like, or what a custom kit should include',
+  'Roughly how many kits you need',
+  'The county and town for delivery',
+  'When you need the kits delivered',
+  'Any branding, age group or packing requirements',
+];
+
+const faqs = [
+  {
+    q: 'Do you deliver outside Nairobi?',
+    a: 'Yes. We deliver anywhere in Kenya — all 47 counties — to offices, schools, health facilities and community distribution points.',
+  },
+  {
+    q: 'Why don’t you show prices on the website?',
+    a: 'Our pricing depends on the package, the number of kits and the delivery location, and larger orders receive volume pricing. A quote lets us give you the best price for your exact order.',
+  },
+  {
+    q: 'Is there a minimum order?',
+    a: 'Yes — kits are supplied in bulk. The minimum order for each package is listed on the Packages page, and order sizes are flexible above that — just tell us what you need.',
+  },
+  {
+    q: 'Can you build a kit to our program’s or donor’s requirements?',
+    a: 'Yes. Custom kits can include different items and quantities, suit specific age groups, and carry your organization’s or donor’s branding.',
+  },
+  {
+    q: 'Can we order regularly, for example every month?',
+    a: 'Yes. Our Essential kit is designed for monthly programs. Tell us your distribution schedule when you request a quote.',
+  },
+];
+---
+
+<BaseLayout
+  title="How Ordering Dignity Kits Works"
+  description="Ordering dignity kits from Rosy's Essentials is simple: choose a package or custom kit, receive your quote, and we pack and deliver anywhere in Kenya."
+>
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">How It Works</p>
+      <h1>Three simple steps from request to delivery</h1>
+      <p class="lead">
+        We handle the sourcing, packing and delivery so your team can focus on the women and girls you serve.
+      </p>
+    </div>
+  </section>
+
+  <section class="section steps-section" aria-label="Ordering steps">
+    <div class="container">
+      <ol class="steps">
+        {steps.map((step, i) => (
+          <li class="step">
+            <div class="step__marker" aria-hidden="true">
+              <span class="step__num">{i + 1}</span>
+            </div>
+            <div class="step__body">
+              <svg class="step__icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+                <path d={step.icon} fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <h2 class="step__title"><span class="visually-hidden">Step {i + 1}: </span>{step.title}</h2>
+              <p>{step.text}</p>
+              {step.link && <a class="step__link" href={step.link.href}>{step.link.label} →</a>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tint" aria-labelledby="checklist-title">
+    <div class="container two-col">
+      <div>
+        <p class="eyebrow">Before you request a quote</p>
+        <h2 id="checklist-title">What to have ready</h2>
+        <p class="muted">
+          Don’t worry if you don’t have every detail yet — an estimate is enough to get started, and we’ll confirm the
+          rest with you.
+        </p>
+      </div>
+      <ul class="ticks checklist">
+        {checklist.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container faq-wrap">
+      <div class="section__intro">
+        <p class="eyebrow">Questions</p>
+        <h2 id="faq-title">Frequently asked questions</h2>
+      </div>
+      <div class="faq">
+        {faqs.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .steps-section {
+    padding-top: 2rem;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  /* Number + connecting line down to the next step */
+  .step__marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step__marker::after {
+    content: '';
+    flex: 1;
+    width: 2px;
+    margin-block: 0.5rem;
+    background: var(--rose-200);
+  }
+
+  .step:last-child .step__marker::after {
+    display: none;
+  }
+
+  .step__num {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--rose-600);
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .step__body {
+    padding-bottom: 2rem;
+  }
+
+  .step:last-child .step__body {
+    padding-bottom: 0;
+  }
+
+  .step__icon {
+    color: var(--rose-700);
+    margin-bottom: 0.5rem;
+  }
+
+  .step__title {
+    font-size: 1.25rem;
+  }
+
+  .step__body p {
+    color: var(--plum-700);
+    max-width: 34rem;
+  }
+
+  .step__link {
+    font-weight: 600;
+  }
+
+  .two-col {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .muted {
+    color: var(--plum-700);
+  }
+
+  .checklist {
+    margin: 0;
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--rose-200);
+    border-radius: var(--radius);
+  }
+
+  .checklist li:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq {
+    border-top: 1px solid var(--line);
+  }
+
+  .faq details {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq summary {
+    position: relative;
+    padding: 1.1rem 2.5rem 1.1rem 0;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq summary::after {
+    content: '+';
+    position: absolute;
+    right: 0.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--rose-700);
+  }
+
+  .faq details[open] summary::after {
+    content: '−';
+  }
+
+  .faq details p {
+    margin: 0 0 1.25rem;
+    color: var(--plum-700);
+    max-width: 44rem;
+  }
+
+  @media (min-width: 900px) {
+    /* Steps run left to right on wide screens */
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .step__marker {
+      flex-direction: row;
+    }
+
+    .step__marker::after {
+      height: 2px;
+      width: auto;
+      margin: 0 0 0 1rem;
+    }
+
+    .step:last-child .step__marker::after {
+      display: block;
+      visibility: hidden;
+    }
+
+    .step__body {
+      padding: 0;
+    }
+
+    .two-col {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .faq-wrap {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+    }
+  }
+</style>

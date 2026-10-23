@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const reasons = [
+  {
+    title: 'Health',
+    text: 'Clean pads, fresh underwear and soap help women and girls manage their periods hygienically and lower the risk of infection and discomfort.',
+  },
+  {
+    title: 'Schooling',
+    text: 'When a girl has what she needs for her period, she can stay in class with confidence instead of missing lessons each month.',
+  },
+  {
+    title: 'Dignity',
+    text: 'Having your own hygiene products — and not having to improvise or ask — lets women and girls go about work, school and family life with confidence.',
+  },
+];
+
+const values = [
+  { title: 'Dignity first', text: 'Every kit is something we would be proud to receive ourselves.' },
+  { title: 'Reliability', text: 'Programs plan around us, so we deliver what we promise, when we promise it.' },
+  { title: 'Quality', text: 'We choose trusted products women already know and use.' },
+  { title: 'Partnership', text: 'We work alongside your team, adapting kits to your program and the people you serve.' },
+];
+
+// PLACEHOLDER testimonials — replace with real quotes (and permission) from partner organizations before launch.
+const testimonials = [
+  { quote: 'Testimonial placeholder — replace with a short quote from a partner organization about reliability or quality.', name: 'Name, Role', org: 'Organization, County' },
+  { quote: 'Testimonial placeholder — replace with a short quote about the impact of the kits on the women and girls served.', name: 'Name, Role', org: 'Organization, County' },
+];
+---
+
+<BaseLayout
+  title="About Us — Dignity Kits Supplier in Kenya"
+  description="Rosy's Essentials is a Kenyan supplier of dignity kits and sanitary pads for NGOs, schools and community organizations, helping women and girls manage their periods with health, confidence and dignity."
+>
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">About Us</p>
+      <h1>Every woman and girl deserves to manage her period with dignity</h1>
+      <p class="lead">
+        Rosy's Essentials is a Kenyan supplier of ready-packed hygiene and personal care kits for the organizations that
+        serve women and girls.
+      </p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="section" aria-labelledby="story-title">
+    <div class="container story">
+      <figure class="story__media">
+        <img
+          src="/images/placeholders/about-team.svg"
+          alt="Placeholder: photo of the Rosy's Essentials team packing kits"
+          width="480"
+          height="320"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="placeholder-note">Placeholder — replace with a photo of the team or a packing day.</figcaption>
+      </figure>
+      <div class="story__copy">
+        <h2 id="story-title">Our story</h2>
+        <!-- PLACEHOLDER story: the owner should rewrite these paragraphs in their own words (who founded Rosy's Essentials, when, and why). -->
+        <p>
+          Rosy's Essentials began with a simple observation: organizations working with women and girls spend a great
+          deal of time sourcing, counting and packing hygiene items — time that could be spent with the people they
+          serve.
+        </p>
+        <p>
+          So we started putting together complete, ready-to-distribute kits: sanitary pads, underwear, soap and personal
+          care items, packed with care and delivered wherever they're needed in Kenya. Today we supply NGOs, schools,
+          faith-based groups and community organizations with kits for one-off distributions, monthly programs and
+          donor-supported events.
+        </p>
+        <p class="placeholder-note">Story placeholder — the owner will replace this with the founder's own story.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section class="section section--tint" aria-labelledby="matters-title">
+    <div class="container">
+      <div class="section__intro">
+        <p class="eyebrow">Why it matters</p>
+        <h2 id="matters-title">Menstrual and personal hygiene shape health, schooling and dignity</h2>
+        <p>
+          Periods are a normal part of life. Yet for many women and girls, the cost of pads and basic hygiene items means
+          making do — and that affects far more than one week a month.
+        </p>
+      </div>
+      <ul class="reasons">
+        {reasons.map((reason) => (
+          <li class="reason">
+            <h3>{reason.title}</h3>
+            <p>{reason.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="matters__close">
+        Reliable supply is what turns a one-off donation into lasting change. That's why we focus on getting the right
+        kits to your program, on time, every time.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section" aria-labelledby="values-title">
+    <div class="container">
+      <div class="section__intro">
+        <p class="eyebrow">What we stand for</p>
+        <h2 id="values-title">Our values</h2>
+      </div>
+      <dl class="values">
+        {values.map((value) => (
+          <div class="value">
+            <dt>{value.title}</dt>
+            <dd>{value.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Testimonials (placeholders) -->
+  <section class="section section--tint" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section__intro">
+        <p class="eyebrow">Partners</p>
+        <h2 id="testimonials-title">What our partners say</h2>
+      </div>
+      <div class="testimonials">
+        {testimonials.map((t) => (
+          <figure class="testimonial">
+            <blockquote>
+              <p>“{t.quote}”</p>
+            </blockquote>
+            <figcaption>
+              <strong>{t.name}</strong>
+              <span>{t.org}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Let's support the women and girls you serve" text="Tell us about your program and we'll put together the right kits, delivered anywhere in Kenya." />
+</BaseLayout>
+
+<style>
+  .story {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .story__media {
+    margin: 0;
+  }
+
+  .story__media img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+
+  .story__media figcaption {
+    margin-top: 0.5rem;
+  }
+
+  .story__copy p:not(.placeholder-note) {
+    font-size: 1.05rem;
+  }
+
+  .reasons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .reason {
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--radius);
+    border-top: 4px solid var(--rose-600);
+    box-shadow: var(--shadow);
+  }
+
+  .reason p {
+    margin: 0;
+    color: var(--plum-700);
+  }
+
+  .matters__close {
+    margin: 2rem 0 0;
+    max-width: 42rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .values {
+    margin: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .value {
+    padding-left: 1rem;
+    border-left: 3px solid var(--rose-200);
+  }
+
+  .value dt {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .value dd {
+    margin: 0;
+    color: var(--plum-700);
+  }
+
+  .testimonials {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .testimonial {
+    margin: 0;
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1px dashed var(--rose-400);
+    border-radius: var(--radius);
+  }
+
+  .testimonial blockquote {
+    margin: 0 0 1rem;
+  }
+
+  .testimonial blockquote p {
+    margin: 0;
+    font-size: 1.05rem;
+    font-style: italic;
+  }
+
+  .testimonial figcaption {
+    display: grid;
+    font-size: 0.9rem;
+  }
+
+  .testimonial figcaption span {
+    color: var(--plum-700);
+  }
+
+  @media (min-width: 768px) {
+    .reasons {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .values {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 3rem;
+    }
+
+    .testimonials {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .story {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+    }
+
+    .values {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

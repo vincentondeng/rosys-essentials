@@ -1,0 +1,446 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import packages from '../data/packages.json';
+import counties from '../data/counties.json';
+import site from '../data/site.json';
+
+const packageOptions = [
+  ...packages.tiers.map((tier) => ({ value: tier.id, label: `${tier.name}${tier.popular ? ' (most popular)' : ''}` })),
+  { value: packages.custom.id, label: packages.custom.name },
+];
+
+const thankYouUrl = new URL('/thank-you/', Astro.site).href;
+const whatsappHref = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(site.whatsappMessage)}`;
+---
+
+<BaseLayout
+  title="Request a Quote for Dignity Kits"
+  description="Request a quote for bulk dignity kits and sanitary pad packs for your NGO, school or community program. Tell us the package, quantity and delivery county — we deliver anywhere in Kenya."
+>
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Request a Quote</p>
+      <h1>Tell us about your order</h1>
+      <p class="lead">
+        Share a few details and we'll send a tailored quote for your package, quantity and delivery location. Prefer to
+        talk? Call or WhatsApp us using the contact details on this page.
+      </p>
+    </div>
+  </section>
+
+  <section class="section quote">
+    <div class="container quote__inner">
+      <div class="quote__main">
+        <!--
+          Form service: Web3Forms (https://web3forms.com). Free, no backend needed.
+          REPLACE the access key in src/data/site.json ("web3formsAccessKey") with the key Web3Forms emails you.
+        -->
+        <form id="quote-form" class="form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value={site.web3formsAccessKey} />
+          <input type="hidden" name="subject" value="New quote request — Rosy's Essentials website" />
+          <input type="hidden" name="from_name" value="Rosy's Essentials website" />
+          <input type="hidden" name="redirect" value={thankYouUrl} />
+          <!-- Spam trap: real visitors never see or tick this -->
+          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <p class="form__legend-note">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
+
+          <fieldset>
+            <legend>Your organization</legend>
+            <div class="field">
+              <label for="organization">Organization name <span class="req" aria-hidden="true">*</span></label>
+              <input id="organization" name="organization" type="text" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="contact_person">Contact person <span class="req" aria-hidden="true">*</span></label>
+              <input id="contact_person" name="contact_person" type="text" autocomplete="name" required />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="+254 7XX XXX XXX"
+                  pattern="(\+254|254|0)\s?[17]\d{2}\s?\d{3}\s?\d{3}"
+                  title="A Kenyan phone number, e.g. +254 712 345 678 or 0712 345 678"
+                  aria-describedby="phone-hint"
+                  required
+                />
+                <p class="hint" id="phone-hint">Kenyan number, e.g. +254 712 345 678</p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Your order</legend>
+            <div class="field-row">
+              <div class="field">
+                <label for="package">Package <span class="req" aria-hidden="true">*</span></label>
+                <select id="package" name="package" required>
+                  <option value="" selected disabled>Choose a package</option>
+                  {packageOptions.map((opt) => <option value={opt.value}>{opt.label}</option>)}
+                </select>
+                <p class="hint"><a href="/packages/">Compare packages</a></p>
+              </div>
+              <div class="field">
+                <label for="quantity">Quantity of kits <span class="req" aria-hidden="true">*</span></label>
+                <input id="quantity" name="quantity" type="number" inputmode="numeric" min="1" step="1" required aria-describedby="quantity-hint" />
+                <p class="hint" id="quantity-hint">An estimate is fine.</p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Delivery</legend>
+            <div class="field-row">
+              <div class="field">
+                <label for="county">Delivery county</label>
+                <select id="county" name="county">
+                  <option value="">Choose a county</option>
+                  {counties.map((county) => <option value={county}>{county}</option>)}
+                </select>
+              </div>
+              <div class="field">
+                <label for="town">Delivery town / location</label>
+                <input id="town" name="town" type="text" autocomplete="address-level2" />
+              </div>
+            </div>
+            <div class="field field--half">
+              <label for="delivery_date">Preferred delivery date</label>
+              <input id="delivery_date" name="delivery_date" type="date" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Anything else?</legend>
+            <div class="field">
+              <label for="message">Message / special requirements</label>
+              <textarea id="message" name="message" rows="5" aria-describedby="message-hint"></textarea>
+              <p class="hint" id="message-hint">For example: age group, branding, custom items or delivery instructions.</p>
+            </div>
+          </fieldset>
+
+          <div class="form__status" id="form-status" role="alert" hidden></div>
+
+          <button type="submit" class="btn btn--primary form__submit">Send quote request</button>
+          <p class="form__privacy">We only use your details to prepare your quote and contact you about your order.</p>
+        </form>
+
+        <div class="success" id="form-success" hidden>
+          <svg viewBox="0 0 48 48" width="56" height="56" aria-hidden="true" focusable="false">
+            <circle cx="24" cy="24" r="22" fill="var(--rose-50)" stroke="var(--rose-600)" stroke-width="2.5" />
+            <path d="M14 25l7 7 13-15" fill="none" stroke="var(--rose-600)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h2 id="success-title" tabindex="-1">Thank you — your quote request has been sent</h2>
+          <p id="success-detail">We've received your request and will be in touch soon with a tailored quote.</p>
+          <p>Need to add something? Call us on <a href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a> or <a href={whatsappHref} target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
+          <div class="btn-row">
+            <a class="btn btn--secondary" href="/packages/">Back to packages</a>
+            <a class="btn btn--secondary" href="/">Home</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="quote__aside" aria-labelledby="contact-title">
+        <div class="aside-card">
+          <h2 id="contact-title">Contact us directly</h2>
+          <ul class="contact-list">
+            <li><span>Phone</span><a href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a></li>
+            <li><span>WhatsApp</span><a href={whatsappHref} target="_blank" rel="noopener">Chat with us</a></li>
+            <li><span>Email</span><a href={`mailto:${site.emailLink}`}>{site.email}</a></li>
+            <li><span>Office</span>{site.address}</li>
+            <li><span>Hours</span>{site.hours}</li>
+          </ul>
+        </div>
+        <div class="aside-card aside-card--tint">
+          <h2>What happens next</h2>
+          <ol class="next-steps">
+            <li>We review your request and confirm any details.</li>
+            <li>We send a tailored quote for your package, quantity and location.</li>
+            <li>Once you approve, we pack and deliver anywhere in Kenya.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement;
+  const status = document.getElementById('form-status') as HTMLElement;
+  const success = document.getElementById('form-success') as HTMLElement;
+  const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  // Pre-select the package passed from a "Request a Quote" button, e.g. /quote/?package=essential
+  const requested = new URLSearchParams(location.search).get('package');
+  const select = form.elements.namedItem('package') as HTMLSelectElement;
+  if (requested && [...select.options].some((o) => o.value === requested)) select.value = requested;
+
+  // Delivery date can't be in the past
+  const date = form.elements.namedItem('delivery_date') as HTMLInputElement;
+  const today = new Date();
+  date.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+  const showError = (html: string) => {
+    status.innerHTML = html;
+    status.hidden = false;
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    status.hidden = true;
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    if (String(data.get('access_key')).startsWith('REPLACE')) {
+      showError('The quote form is not connected yet: add the Web3Forms access key in <code>src/data/site.json</code>.');
+      return;
+    }
+    data.delete('redirect'); // only used when JavaScript is off
+
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    try {
+      const response = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || 'Submission failed');
+
+      const name = String(data.get('contact_person')).trim();
+      const pkg = select.options[select.selectedIndex].text.replace(' (most popular)', '');
+      const detail = document.getElementById('success-detail') as HTMLElement;
+      detail.textContent = `Thank you, ${name}. We've received your request for ${data.get('quantity')} × ${pkg} kits and will reply to ${data.get('email')} with a tailored quote.`;
+      form.hidden = true;
+      success.hidden = false;
+      (document.getElementById('success-title') as HTMLElement).focus();
+    } catch {
+      showError(
+        `Sorry, we couldn't send your request. Please try again, or contact us by phone or WhatsApp using the details on this page.`,
+      );
+      submit.disabled = false;
+      submit.textContent = 'Send quote request';
+    }
+  });
+</script>
+
+<style>
+  .quote {
+    padding-top: 1.5rem;
+  }
+
+  .quote__inner {
+    display: grid;
+    gap: 2rem;
+  }
+
+  /* Form */
+  .form fieldset {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border: 0;
+  }
+
+  .form legend {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding: 0 0 0.4rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .form__legend-note {
+    font-size: 0.9rem;
+    color: var(--plum-700);
+  }
+
+  .req {
+    color: var(--rose-700);
+  }
+
+  .field {
+    display: grid;
+    gap: 0.35rem;
+    align-content: start;
+    margin-bottom: 1rem;
+  }
+
+  .field-row {
+    display: grid;
+    gap: 0 1rem;
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  input:not([type='checkbox']),
+  select,
+  textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.65rem 0.8rem;
+    border: 1.5px solid #c9b3bf;
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    color: var(--plum-900);
+    font: inherit;
+    font-size: 1rem; /* 16px stops iOS zooming into fields */
+  }
+
+  select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 7.5l5 5 5-5' fill='none' stroke='%23574152' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.1rem;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--rose-600);
+    outline: 3px solid rgb(168 52 90 / 25%);
+    outline-offset: 0;
+  }
+
+  input:user-invalid,
+  select:user-invalid {
+    border-color: #b3261e;
+  }
+
+  .hint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--plum-700);
+  }
+
+  .form__status {
+    margin-bottom: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    background: #fdecea;
+    border: 1px solid #f0b8b2;
+    color: #7a1c14;
+  }
+
+  .form__submit {
+    width: 100%;
+    font-size: 1.05rem;
+    min-height: 52px;
+  }
+
+  .form__submit:disabled {
+    opacity: 0.7;
+    cursor: progress;
+  }
+
+  .form__privacy {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--plum-700);
+  }
+
+  /* Success */
+  .success {
+    padding: 2rem 1.5rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 2px solid var(--rose-600);
+    box-shadow: var(--shadow);
+  }
+
+  .success svg {
+    margin-bottom: 1rem;
+  }
+
+  .success h2:focus {
+    outline: none;
+  }
+
+  /* Aside */
+  .quote__aside {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .aside-card {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--white);
+  }
+
+  .aside-card--tint {
+    background: var(--rose-50);
+  }
+
+  .aside-card h2 {
+    font-size: 1.15rem;
+  }
+
+  .contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-list span {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--plum-700);
+  }
+
+  .next-steps {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .field-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field--half {
+      max-width: calc(50% - 0.5rem);
+    }
+
+    .form__submit {
+      width: auto;
+      padding-inline: 2.5rem;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .quote__inner {
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      gap: 3.5rem;
+    }
+
+    .quote__aside {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+    }
+  }
+</style>

@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PackageCards from '../components/PackageCards.astro';
+import WhyChooseUs from '../components/WhyChooseUs.astro';
+import DeliveryBanner from '../components/DeliveryBanner.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based organizations', 'Women & girls programs'];
+---
+
+<BaseLayout
+  title="Sanitary Pads Supplier Kenya | Dignity Kits for NGOs"
+  description="Rosy's Essentials supplies ready-packed dignity kits — sanitary pads, underwear and personal care items — to NGOs, schools and community organizations in bulk, with delivery anywhere in Kenya."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Dignity kits supplier · Kenya</p>
+        <h1>Dignity for every woman and girl, delivered reliably.</h1>
+        <p class="lead">
+          We supply ready-packed hygiene and personal care kits to NGOs, schools, faith-based groups and community
+          organizations — in the quantities your program needs, delivered anywhere in Kenya.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/quote/">Request a Quote</a>
+          <a class="btn btn--secondary" href="/packages/">View packages</a>
+        </div>
+        <ul class="hero__facts">
+          <li>Bulk orders with volume pricing</li>
+          <li>Custom kits on request</li>
+          <li>Delivery to all 47 counties</li>
+        </ul>
+      </div>
+      <figure class="hero__media">
+        <img
+          src="/images/placeholders/hero.svg"
+          alt="Placeholder: packed dignity kits ready for distribution"
+          width="600"
+          height="480"
+          fetchpriority="high"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- Who we serve -->
+  <section class="serve" aria-labelledby="serve-title">
+    <div class="container">
+      <h2 id="serve-title" class="serve__title">Supplying organizations that serve women and girls</h2>
+      <ul class="serve__list">
+        {audiences.map((a) => <li>{a}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container intro">
+      <div>
+        <p class="eyebrow">Why it matters</p>
+        <h2>Reliable supply means girls stay in school and women go about their day with confidence.</h2>
+      </div>
+      <div>
+        <p>
+          When a program can count on sanitary pads and basic hygiene items arriving on time, every month, the women and
+          girls it serves can count on them too.
+        </p>
+        <p>
+          Rosy's Essentials takes the sourcing, packing and delivery off your hands, so your team can focus on the people
+          you serve. <a href="/about/">Read our story</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages summary -->
+  <section class="section section--tint" aria-labelledby="packages-title">
+    <div class="container">
+      <div class="section__intro">
+        <p class="eyebrow">Our packages</p>
+        <h2 id="packages-title">Three ready-made kits, or one built for you</h2>
+        <p>
+          Every kit is sold in bulk with volume-based pricing. Choose a package and request a quote — we'll tailor it to
+          your quantity and delivery location.
+        </p>
+      </div>
+      <PackageCards />
+    </div>
+  </section>
+
+  <!-- Why choose us -->
+  <section class="section" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section__intro">
+        <p class="eyebrow">Why choose us</p>
+        <h2 id="why-title">A supplier your program can rely on</h2>
+      </div>
+      <WhyChooseUs />
+    </div>
+  </section>
+
+  <!-- Delivery -->
+  <section class="section section--tint section--tight">
+    <div class="container">
+      <DeliveryBanner />
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
+    padding-block: 2.5rem 3rem;
+  }
+
+  .hero__inner {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero__copy .lead {
+    max-width: 36rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__facts {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.95rem;
+    color: var(--plum-700);
+  }
+
+  .hero__facts li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .hero__facts li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.3em;
+    width: 0.4rem;
+    height: 0.75rem;
+    border: solid var(--rose-600);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .hero__media {
+    margin: 0;
+  }
+
+  .hero__media img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+
+  .serve {
+    border-block: 1px solid var(--line);
+    padding-block: 1.5rem;
+  }
+
+  .serve__title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--plum-700);
+    margin-bottom: 0.75rem;
+  }
+
+  .serve__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .serve__list li {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: var(--rose-50);
+    border: 1px solid var(--rose-200);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .intro h2 {
+    max-width: 30rem;
+  }
+
+  .intro p {
+    color: var(--plum-700);
+    font-size: 1.05rem;
+  }
+
+  @media (min-width: 900px) {
+    .hero {
+      padding-block: 4rem 4.5rem;
+    }
+
+    .hero__inner {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 3.5rem;
+    }
+
+    .hero__facts {
+      grid-auto-flow: column;
+      gap: 1.5rem;
+    }
+
+    .intro {
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+</style>

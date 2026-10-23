@@ -1,0 +1,79 @@
+{
+  "_note": "The ONLY place kit contents live. Quantities are placeholders until the owner confirms them. Never add prices here — pricing is quote-only.",
+  "items": [
+    { "key": "pads", "label": "Sanitary pads" },
+    { "key": "underwear", "label": "Underwear" },
+    { "key": "soap", "label": "Bathing soap" },
+    { "key": "toothpaste", "label": "Toothpaste" },
+    { "key": "jelly", "label": "Petroleum jelly" },
+    { "key": "packaging", "label": "Packaging" }
+  ],
+  "tiers": [
+    {
+      "id": "basic",
+      "name": "Basic",
+      "summary": "The essentials every woman and girl needs, in a simple pouch.",
+      "bestFor": "One-off distributions",
+      "popular": false,
+      "minOrder": "[MOQ — REPLACE] kits",
+      "image": "/images/placeholders/kit-basic.svg",
+      "imageAlt": "Placeholder image of the Basic kit in a plain pouch",
+      "contents": {
+        "pads": "1 pack",
+        "underwear": "1 pair",
+        "soap": "1 bar",
+        "toothpaste": null,
+        "jelly": null,
+        "packaging": "Plain pouch"
+      }
+    },
+    {
+      "id": "essential",
+      "name": "Essential",
+      "summary": "A fuller kit for programs that distribute every month.",
+      "bestFor": "Monthly programs",
+      "popular": true,
+      "minOrder": "[MOQ — REPLACE] kits",
+      "image": "/images/placeholders/kit-essential.svg",
+      "imageAlt": "Placeholder image of the Essential kit in a branded pouch",
+      "contents": {
+        "pads": "2 packs",
+        "underwear": "2 pairs",
+        "soap": "2 bars",
+        "toothpaste": "1 tube",
+        "jelly": "1 small tub",
+        "packaging": "Branded pouch"
+      }
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "summary": "Our most complete kit, in a reusable bag women keep using.",
+      "bestFor": "Flagship / donor-visible events",
+      "popular": false,
+      "minOrder": "[MOQ — REPLACE] kits",
+      "image": "/images/placeholders/kit-premium.svg",
+      "imageAlt": "Placeholder image of the Premium kit in a branded reusable bag",
+      "contents": {
+        "pads": "3 packs",
+        "underwear": "3 pairs",
+        "soap": "2 bars",
+        "toothpaste": "1 tube + toothbrush",
+        "jelly": "1 large tub",
+        "packaging": "Branded reusable bag"
+      }
+    }
+  ],
+  "custom": {
+    "id": "custom",
+    "name": "Custom Kit",
+    "summary": "Need something different? We'll build it to your program's needs.",
+    "points": [
+      "Choose the items and quantities",
+      "Add your organization's or donor's branding",
+      "Suited to specific age groups or programs"
+    ],
+    "image": "/images/placeholders/kit-custom.svg",
+    "imageAlt": "Placeholder image of a custom-built kit"
+  }
+}

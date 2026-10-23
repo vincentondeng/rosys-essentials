@@ -1,0 +1,18 @@
+<!-- PLACEHOLDER image: replace with a real, compressed (WebP/JPG, ~150 KB) photo of packed kits or a distribution day. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="Placeholder: packed dignity kits">
+  <rect width="600" height="480" rx="24" fill="#f9e4ea"/>
+  <circle cx="470" cy="110" r="70" fill="#f2c9d4"/>
+  <g stroke="#a8345a" stroke-width="3">
+    <rect x="70" y="200" width="170" height="150" rx="18" fill="#ffffff"/>
+    <path d="M70 240h170"/>
+    <rect x="215" y="160" width="190" height="190" rx="20" fill="#fdf3f5"/>
+    <path d="M215 210h190"/>
+    <rect x="380" y="210" width="160" height="140" rx="18" fill="#ffffff"/>
+    <path d="M380 248h160"/>
+  </g>
+  <rect x="137" y="228" width="36" height="24" rx="6" fill="#a8345a"/>
+  <rect x="290" y="196" width="40" height="28" rx="7" fill="#a8345a"/>
+  <rect x="442" y="236" width="36" height="24" rx="6" fill="#a8345a"/>
+  <rect x="50" y="350" width="500" height="10" rx="5" fill="#e8b3c2"/>
+  <text x="300" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8a2849">PLACEHOLDER — REPLACE WITH PHOTO</text>
+</svg>

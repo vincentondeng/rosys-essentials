@@ -1,0 +1,64 @@
+---
+// PLACEHOLDER logo — a simple rose mark plus wordmark. Replace the SVG with the final logo when it is ready.
+interface Props {
+  inverse?: boolean;
+}
+const { inverse = false } = Astro.props;
+---
+
+<a href="/" class:list={['logo', { 'logo--inverse': inverse }]} aria-label="Rosy's Essentials — home">
+  <svg class="logo__mark" viewBox="0 0 40 40" width="36" height="36" aria-hidden="true" focusable="false">
+    <path d="M20 5c7.2 0 12.5 5.4 12.5 12S27.2 30 20 30 7.5 23.6 7.5 17 12.8 5 20 5z" fill="#f2c9d4" />
+    <path d="M20 10.5c4.2 0 7.3 2.9 7.3 6.7S24.2 24 20 24s-7.3-2.9-7.3-6.8" fill="none" stroke="#a8345a" stroke-width="2.2" stroke-linecap="round" />
+    <path d="M20 15c2 0 3.3 1.2 3.3 2.7S21.9 20.4 20 20.4 16.7 19 16.7 17.6" fill="none" stroke="#a8345a" stroke-width="2.2" stroke-linecap="round" />
+    <path d="M20 30v7" stroke="#574152" stroke-width="2.2" stroke-linecap="round" />
+    <path d="M20 34.5c-3.4 0-5.7-1.6-6.7-4.4 3.4 0 5.7 1.6 6.7 4.4z" fill="#574152" />
+  </svg>
+  <span class="logo__text">Rosy's <span>Essentials</span></span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--plum-900);
+  }
+
+  .logo__mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Phones: name stacks on two lines so the header fits; one line from tablet up */
+  .logo__text {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  @media (min-width: 600px) {
+    .logo__mark {
+      width: 36px;
+      height: 36px;
+    }
+
+    .logo__text {
+      display: inline;
+      font-size: 1.15rem;
+    }
+  }
+
+  .logo__text span {
+    color: var(--rose-700);
+  }
+
+  .logo--inverse,
+  .logo--inverse .logo__text span {
+    color: var(--white);
+  }
+</style>

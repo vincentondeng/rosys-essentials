@@ -1,0 +1,14 @@
+{
+  "_note": "Business contact details used across the whole site. Every value marked REPLACE is a placeholder for the owner to fill in.",
+  "name": "Rosy's Essentials",
+  "tagline": "Dignity kits, delivered anywhere in Kenya",
+  "phoneDisplay": "+254 7XX XXX XXX (REPLACE)",
+  "phoneLink": "+2547XXXXXXXX",
+  "whatsappNumber": "2547XXXXXXXX",
+  "whatsappMessage": "Hello Rosy's Essentials, I would like to ask about dignity kits for our organization.",
+  "email": "hello@rosysessentials.co.ke (REPLACE)",
+  "emailLink": "hello@rosysessentials.co.ke",
+  "address": "Physical address (REPLACE), Nairobi, Kenya",
+  "hours": "Mon–Fri, 8:00am – 5:00pm (REPLACE)",
+  "web3formsAccessKey": "REPLACE_WITH_WEB3FORMS_ACCESS_KEY"
+}

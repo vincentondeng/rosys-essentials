@@ -1,0 +1,194 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/packages/', label: 'Packages' },
+  { href: '/how-it-works/', label: 'How It Works' },
+  { href: '/about/', label: 'About Us' },
+];
+
+const current = Astro.url.pathname.replace(/\/?$/, '/');
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <Logo />
+
+    <nav class="nav nav--desktop" aria-label="Main">
+      <ul>
+        {links.map((link) => (
+          <li>
+            <a href={link.href} aria-current={current === link.href ? 'page' : undefined}>{link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/quote/" class="btn btn--primary site-header__cta">Request a Quote</a>
+
+    <!-- Mobile menu: <details> opens and closes without any JavaScript. -->
+    <details class="nav-mobile">
+      <summary aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+          <path class="icon-open" d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path class="icon-close" d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span class="nav-mobile__label">Menu</span>
+      </summary>
+      <nav class="nav-mobile__panel" aria-label="Main (mobile)">
+        <ul>
+          {links.map((link) => (
+            <li>
+              <a href={link.href} aria-current={current === link.href ? 'page' : undefined}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+        <a href="/quote/" class="btn btn--primary btn--block">Request a Quote</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(255 255 255 / 96%);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: var(--header-h);
+  }
+
+  .site-header__inner > :global(.logo) {
+    margin-right: auto;
+  }
+
+  /* Small phones: compact CTA so logo + quote + menu fit on one row */
+  .site-header__cta {
+    min-height: 40px;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .nav ul,
+  .nav-mobile__panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav a,
+  .nav-mobile__panel a:not(.btn) {
+    color: var(--plum-900);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .nav a[aria-current='page'],
+  .nav-mobile__panel a[aria-current='page'] {
+    color: var(--rose-700);
+    font-weight: 700;
+  }
+
+  .nav--desktop {
+    display: none;
+  }
+
+  /* Mobile menu */
+  .nav-mobile summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    color: var(--plum-900);
+    cursor: pointer;
+  }
+
+  .nav-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nav-mobile__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .icon-close,
+  .nav-mobile[open] .icon-open {
+    display: none;
+  }
+
+  .nav-mobile[open] .icon-close {
+    display: inline;
+  }
+
+  .nav-mobile__panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    padding: 0.5rem var(--gutter) 1.25rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
+
+  .nav-mobile__panel li a {
+    display: block;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-mobile__panel .btn {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 359px) {
+    .site-header__cta {
+      display: none;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .nav-mobile {
+      display: none;
+    }
+
+    .nav--desktop {
+      display: block;
+    }
+
+    .nav--desktop ul {
+      display: flex;
+      gap: 1.75rem;
+    }
+
+    .nav--desktop a:hover {
+      color: var(--rose-700);
+    }
+
+    .site-header__inner {
+      gap: 1.5rem;
+    }
+
+    .site-header__cta {
+      min-height: 44px;
+      padding: 0.7rem 1.25rem;
+      font-size: 1rem;
+    }
+  }
+</style>

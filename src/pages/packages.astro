@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PackageCompare from '../components/PackageCompare.astro';
+import DeliveryBanner from '../components/DeliveryBanner.astro';
+import CtaBand from '../components/CtaBand.astro';
+import packages from '../data/packages.json';
+
+const { items, tiers, custom } = packages;
+---
+
+<BaseLayout
+  title="Dignity Kit Packages for NGOs & Schools"
+  description="Compare our Basic, Essential and Premium dignity kits — sanitary pads, underwear, soap and personal care items — or request a custom kit. Bulk orders, delivered anywhere in Kenya."
+>
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Packages</p>
+      <h1>Choose the kit that fits your program</h1>
+      <p class="lead">
+        Three ready-made dignity kits, sold in bulk with volume-based pricing — or a custom kit built around your
+        program. Every order is delivered anywhere in Kenya.
+      </p>
+      <nav class="jump" aria-label="Jump to a package">
+        {tiers.map((tier) => <a href={`#${tier.id}`}>{tier.name}</a>)}
+        <a href="#custom">{custom.name}</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="section section--compare" aria-labelledby="compare-title">
+    <div class="container">
+      <h2 id="compare-title">Compare the kits</h2>
+      <PackageCompare />
+      <p class="note">
+        Prices depend on the package, quantity and delivery location. <a href="/quote/">Request a quote</a> and we'll
+        send a tailored price for your order.
+      </p>
+    </div>
+  </section>
+
+  <!-- Detail per tier -->
+  {tiers.map((tier, i) => (
+    <section id={tier.id} class:list={['section', 'tier', { 'section--tint': i % 2 === 0 }]} aria-labelledby={`${tier.id}-title`}>
+      <div class:list={['container', 'tier__inner', { 'tier__inner--flip': i % 2 === 1 }]}>
+        <figure class="tier__media">
+          <img src={tier.image} alt={tier.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
+        </figure>
+        <div class="tier__copy">
+          {tier.popular && <p class="tier__badge">Most popular</p>}
+          <h2 id={`${tier.id}-title`}>{tier.name} kit</h2>
+          <p class="tier__best">Best for: <strong>{tier.bestFor}</strong></p>
+          <p>{tier.summary}</p>
+
+          <h3>What's inside</h3>
+          <ul class="tier__list">
+            {items.map((item) => {
+              const value = tier.contents[item.key as keyof typeof tier.contents];
+              return value ? (
+                <li><span>{item.label}</span><strong>{value}</strong></li>
+              ) : (
+                <li class="tier__excluded"><span>{item.label}</span><span>Not included</span></li>
+              );
+            })}
+          </ul>
+
+          <dl class="tier__facts">
+            <div>
+              <dt>Minimum order</dt>
+              <dd>{tier.minOrder}</dd>
+            </div>
+            <div>
+              <dt>Delivery</dt>
+              <dd>Anywhere in Kenya</dd>
+            </div>
+          </dl>
+
+          <a class="btn btn--primary" href={`/quote/?package=${tier.id}`}>
+            Request a Quote<span class="visually-hidden"> for the {tier.name} kit</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Custom -->
+  <section id="custom" class="section tier" aria-labelledby="custom-title">
+    <div class="container tier__inner tier__inner--flip">
+      <figure class="tier__media">
+        <img src={custom.image} alt={custom.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
+      </figure>
+      <div class="tier__copy">
+        <h2 id="custom-title">{custom.name}</h2>
+        <p class="lead">{custom.summary}</p>
+        <ul class="ticks">
+          {custom.points.map((point) => <li>{point}</li>)}
+        </ul>
+        <p>Tell us about your program, the people you serve and your budget, and we'll propose a kit to match.</p>
+        <a class="btn btn--primary" href="/quote/?package=custom">Request a Custom Kit</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint section--tight">
+    <div class="container">
+      <DeliveryBanner />
+    </div>
+  </section>
+
+  <CtaBand title="Not sure which kit is right?" text="Tell us about your program and we'll recommend a package — or build a custom kit around your needs." />
+</BaseLayout>
+
+<style>
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .jump a {
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid var(--rose-200);
+    background: var(--white);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .jump a:hover {
+    background: var(--rose-50);
+  }
+
+  .section--compare {
+    padding-top: 2rem;
+  }
+
+  .note {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--plum-700);
+  }
+
+  .tier__inner {
+    display: grid;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  .tier__media {
+    margin: 0;
+  }
+
+  .tier__media img {
+    width: 100%;
+    border-radius: var(--radius);
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .tier__badge {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: var(--rose-600);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .tier__best {
+    color: var(--plum-700);
+  }
+
+  .tier__copy h3 {
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .tier__list {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .tier__list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tier__list strong {
+    text-align: right;
+  }
+
+  .tier__excluded {
+    color: var(--plum-700);
+    font-style: italic;
+  }
+
+  .tier__facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .tier__facts div {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    border: 1px solid var(--line);
+  }
+
+  .tier__facts dt {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--plum-700);
+  }
+
+  .tier__facts dd {
+    margin: 0.15rem 0 0;
+    font-weight: 600;
+  }
+
+  @media (min-width: 900px) {
+    .tier__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .tier__inner--flip .tier__media {
+      order: 2;
+    }
+  }
+</style>

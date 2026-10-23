@@ -1,0 +1,96 @@
+---
+const points = [
+  {
+    title: 'Ready-packed kits',
+    text: 'Every kit arrives assembled and ready to hand out, saving your team procurement and packing time.',
+    icon: 'M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8',
+  },
+  {
+    title: 'Bulk pricing, flexible sizes',
+    text: 'Volume-based pricing for large programs, and order sizes that fit smaller budgets too.',
+    icon: 'M4 18h16M6 18V11M10 18V7M14 18v-5M18 18V9',
+  },
+  {
+    title: 'Quality, trusted products',
+    text: 'We source products women already know and trust, so every kit is something worth receiving.',
+    icon: 'M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z',
+  },
+  {
+    title: 'Reliable delivery, anywhere in Kenya',
+    text: 'From Nairobi to the most remote county, we deliver to your office, school or distribution point.',
+    icon: 'M12 21s-6-5.3-6-10.5a6 6 0 0 1 12 0C18 15.7 12 21 12 21zM12 12.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+  },
+  {
+    title: 'Custom kits for programs and donors',
+    text: 'Choose the contents, quantities and branding to match your program or a donor’s requirements.',
+    icon: 'M4 20l4-1 11-11-3-3L5 16zM14 7l3 3',
+  },
+];
+---
+
+<ul class="why">
+  {points.map((point) => (
+    <li class="why__item">
+      <span class="why__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+          <path d={point.icon} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <div>
+        <h3 class="why__title">{point.title}</h3>
+        <p class="why__text">{point.text}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .why {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .why__item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .why__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--rose-200);
+    color: var(--rose-700);
+  }
+
+  .why__title {
+    font-size: 1.05rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .why__text {
+    margin: 0;
+    color: var(--plum-700);
+  }
+
+  @media (min-width: 768px) {
+    .why {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .why {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import site from '../data/site.json';
+
+const href = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(site.whatsappMessage)}`;
+---
+
+<a class="whatsapp" href={href} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp (opens in a new tab)">
+  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
+    <path
+      d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linejoin="round"></path>
+    <path
+      d="M9.1 7.9c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.4 1 2.8 1.2 3 2 3.2 5 4.3c2.5 1 3 .8 3.5.7.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4l-.5-.3-1.9-.9c-.3-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.6.1a7 7 0 0 1-3.5-3c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.5L9.1 8z"
+      fill="currentColor"></path>
+  </svg>
+  <span class="whatsapp__label">WhatsApp us</span>
+</a>
+
+<style>
+  .whatsapp {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 56px;
+    min-height: 56px;
+    padding: 0.9rem;
+    border-radius: 999px;
+    background: var(--whatsapp);
+    color: var(--white);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 22%);
+  }
+
+  .whatsapp:hover {
+    color: var(--white);
+    filter: brightness(1.08);
+  }
+
+  .whatsapp__label {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .whatsapp {
+      right: 1.5rem;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+      padding: 0.8rem 1.2rem 0.8rem 1rem;
+    }
+
+    .whatsapp__label {
+      display: inline;
+    }
+  }
+</style>
