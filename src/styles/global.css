@@ -1,7 +1,51 @@
 /* Rosy's Essentials — global styles. Mobile-first; larger screens are layered on with min-width queries. */
 
+/* Self-hosted fonts (Latin subset, SIL Open Font License) — see README "Fonts". */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/fraunces-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/fraunces-600-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/nunito-var.woff2') format('woff2');
+}
+
+/* Metric-matched local fallbacks so text doesn't jump when the web fonts arrive */
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia');
+  size-adjust: 104%;
+  ascent-override: 92%;
+  descent-override: 24%;
+}
+
+@font-face {
+  font-family: 'Nunito Fallback';
+  src: local('Arial');
+  size-adjust: 101%;
+  ascent-override: 99.7%;
+  descent-override: 34.8%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Brand colours */
+  --rose-25: #fef8f9;
   --rose-50: #fdf3f5;
   --rose-100: #f9e4ea;
   --rose-200: #f2c9d4;
@@ -11,14 +55,17 @@
   --plum-900: #2d1a2a; /* body text */
   --plum-700: #574152; /* secondary text — 8.9:1 on white */
   --white: #ffffff;
+  --cream: #fffaf7;
   --line: #ead8de;
   --whatsapp: #187a42; /* darker than brand green so the white label passes contrast */
 
   /* Type & spacing */
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --shadow: 0 1px 2px rgb(45 26 42 / 6%), 0 4px 16px rgb(45 26 42 / 6%);
+  --font-body: 'Nunito', 'Nunito Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, 'Times New Roman', serif;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 1px 2px rgb(138 40 73 / 5%), 0 8px 24px -6px rgb(138 40 73 / 12%);
+  --shadow-lift: 0 2px 4px rgb(138 40 73 / 6%), 0 16px 36px -8px rgb(138 40 73 / 20%);
   --container: 1120px;
   --gutter: 1.25rem;
   --header-h: 4rem;
@@ -37,8 +84,8 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font);
-  font-size: 1rem;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
   line-height: 1.6;
   color: var(--plum-900);
   background: var(--white);
@@ -54,20 +101,29 @@ svg {
 h1,
 h2,
 h3 {
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
   margin: 0 0 0.75rem;
   color: var(--plum-900);
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(1.9rem, 6vw, 3rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2.1rem, 7vw, 3.4rem);
+  letter-spacing: -0.015em;
 }
 
 h2 {
-  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  font-size: clamp(1.65rem, 5vw, 2.3rem);
   letter-spacing: -0.01em;
+}
+
+/* Italic accent phrase inside headings, e.g. <h1>… <em>delivered reliably</em></h1> */
+h1 em,
+h2 em {
+  font-style: italic;
+  color: var(--rose-700);
 }
 
 h3 {
@@ -106,7 +162,7 @@ a:hover {
 }
 
 .section--tint {
-  background: var(--rose-50);
+  background: linear-gradient(180deg, var(--rose-50) 0%, var(--cream) 100%);
 }
 
 .section__intro {
@@ -120,13 +176,27 @@ a:hover {
 }
 
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.8rem 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: var(--rose-100);
   font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--rose-700);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+/* Small petal dot */
+.eyebrow::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50% 0;
+  background: var(--rose-600);
 }
 
 .lead {
@@ -140,8 +210,31 @@ a:hover {
 
 /* Inner-page heading band */
 .page-head {
-  background: linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 0%, var(--rose-100) 0%, transparent 70%),
+    linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
   padding-block: 2.5rem 1rem;
+}
+
+/* Soft petal accent in the corner */
+.page-head::after {
+  content: '';
+  position: absolute;
+  right: -3rem;
+  top: -3rem;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 60% 0;
+  background: var(--rose-200);
+  opacity: 0.35;
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+
+.page-head > * {
+  position: relative;
 }
 
 .page-head .lead {
@@ -184,21 +277,28 @@ a:hover {
   border: 2px solid transparent;
   border-radius: 999px;
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
 }
 
 .btn--primary {
-  background: var(--rose-600);
+  background: linear-gradient(135deg, var(--rose-600) 0%, var(--rose-700) 100%);
   color: var(--white);
+  box-shadow: 0 4px 14px -4px rgb(168 52 90 / 50%);
 }
 
 .btn--primary:hover {
   background: var(--rose-700);
   color: var(--white);
+  box-shadow: 0 6px 18px -4px rgb(168 52 90 / 55%);
 }
 
 .btn--secondary {
@@ -265,7 +365,7 @@ a:hover {
   }
 
   .section {
-    padding-block: 4.5rem;
+    padding-block: 5rem;
   }
 }
 
@@ -276,6 +376,10 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .btn:hover {
+    transform: none;
+  }
+
   * {
     transition: none !important;
     scroll-behavior: auto !important;

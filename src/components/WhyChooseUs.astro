@@ -57,6 +57,10 @@ const points = [
     display: flex;
     gap: 1rem;
     align-items: flex-start;
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: var(--cream);
+    border: 1px solid var(--line);
   }
 
   .why__icon {
@@ -65,14 +69,13 @@ const points = [
     place-items: center;
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
-    background: var(--white);
-    border: 1px solid var(--rose-200);
+    border-radius: 50% 50% 50% 12%;
+    background: linear-gradient(135deg, var(--rose-100) 0%, var(--rose-200) 100%);
     color: var(--rose-700);
   }
 
   .why__title {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     margin-bottom: 0.25rem;
   }
 
@@ -84,7 +87,7 @@ const points = [
   @media (min-width: 768px) {
     .why {
       grid-template-columns: repeat(2, 1fr);
-      gap: 2rem 2.5rem;
+      gap: 1.25rem;
     }
   }
 

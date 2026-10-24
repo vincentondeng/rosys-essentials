@@ -75,10 +75,17 @@ const custom = packages.custom;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
   }
 
   .card--popular {
     border: 2px solid var(--rose-600);
+    box-shadow: var(--shadow-lift);
   }
 
   .card__badge {
@@ -86,12 +93,26 @@ const custom = packages.custom;
     top: 0.75rem;
     left: 0.75rem;
     margin: 0;
-    padding: 0.25rem 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    z-index: 1;
+    padding: 0.3rem 0.8rem;
     border-radius: 999px;
-    background: var(--rose-600);
-    color: var(--white);
+    background: var(--white);
+    color: var(--rose-700);
+    border: 1px solid var(--rose-200);
+    box-shadow: 0 4px 12px -4px rgb(138 40 73 / 30%);
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 800;
+  }
+
+  .card__badge::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50% 0;
+    background: var(--rose-600);
   }
 
   /* Shorter images on phones keep the three cards from becoming a long scroll */
@@ -110,7 +131,7 @@ const custom = packages.custom;
   }
 
   .card__title {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     margin-bottom: 0.25rem;
   }
 
@@ -187,10 +208,15 @@ const custom = packages.custom;
   }
 
   .card--custom {
-    background: var(--rose-50);
-    border-style: dashed;
-    border-color: var(--rose-400);
+    background: linear-gradient(135deg, var(--rose-50) 0%, var(--cream) 100%);
+    border: 2px dashed var(--rose-400);
     box-shadow: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover {
+      transform: none;
+    }
   }
 
   @media (min-width: 640px) {

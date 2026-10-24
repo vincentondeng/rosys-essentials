@@ -276,6 +276,7 @@ Search the project for `REPLACE` to find every remaining placeholder.
 ```
 public/                     Files served as-is
   favicon.svg, favicon-32.png, apple-touch-icon.png, og-image.jpg, robots.txt
+  fonts/                    Self-hosted web fonts (Fraunces for headings, Nunito for body text)
   images/placeholders/      Placeholder images, to replace before launch
 src/
   data/
@@ -292,3 +293,8 @@ astro.config.mjs            Site domain + sitemap settings
 **Brand colours** are defined once at the top of `src/styles/global.css` (`--rose-600` for buttons, `--plum-900`
 for text, and so on). If you change them, keep enough contrast for readability. <https://webaim.org/resources/contrastchecker/>
 can check a pair of colours.
+
+**Fonts** are Fraunces (headings) and Nunito (body text), both free under the SIL Open Font License. They're stored
+in `public/fonts/` so the site never contacts Google, which helps on slow connections. To change them, replace the
+`.woff2` files, update the `@font-face` blocks at the top of `src/styles/global.css` and the two `preload` links in
+`src/layouts/BaseLayout.astro`, and set `--font-display` / `--font-body`.

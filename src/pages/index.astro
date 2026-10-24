@@ -34,7 +34,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
     <div class="container hero__inner">
       <div class="hero__copy">
         <p class="eyebrow">Dignity kits supplier · Kenya</p>
-        <h1>Dignity for every woman and girl, delivered reliably.</h1>
+        <h1>Dignity for every woman and girl, <em>delivered reliably.</em></h1>
         <p class="lead">
           We supply ready-packed hygiene and personal care kits to NGOs, schools, faith-based groups and community
           organizations — in the quantities your program needs, delivered anywhere in Kenya.
@@ -50,6 +50,9 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
         </ul>
       </div>
       <figure class="hero__media">
+        <svg class="hero__blob" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+          <path d="M44 22c30-22 86-24 118 6s40 84 12 120-92 56-130 30S-8 104 6 68s8-24 38-46z" fill="currentColor" />
+        </svg>
         <img
           src={url('/images/placeholders/hero.svg')}
           alt="Placeholder: packed dignity kits ready for distribution"
@@ -129,7 +132,10 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
 
 <style>
   .hero {
-    background: linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 70% 60% at 0% 0%, var(--rose-100) 0%, transparent 70%),
+      linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
     padding-block: 2.5rem 3rem;
   }
 
@@ -172,12 +178,30 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   }
 
   .hero__media {
+    position: relative;
     margin: 0;
+    padding: 1rem;
   }
 
+  /* Decorative blush blob sitting behind the photo */
+  .hero__blob {
+    position: absolute;
+    top: -4%;
+    left: -6%;
+    width: 112%;
+    height: 108%;
+    max-width: none;
+    color: var(--rose-200);
+    opacity: 0.7;
+  }
+
+  /* Arch frame: rounded top, softer bottom corners */
   .hero__media img {
+    position: relative;
     width: 100%;
-    border-radius: var(--radius);
+    border-radius: 999px 999px var(--radius) var(--radius) / 40% 40% var(--radius) var(--radius);
+    border: 6px solid var(--white);
+    box-shadow: var(--shadow-lift);
   }
 
   .serve {
@@ -186,6 +210,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   }
 
   .serve__title {
+    font-family: var(--font-body);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -204,10 +229,11 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   }
 
   .serve__list li {
-    padding: 0.35rem 0.85rem;
+    padding: 0.4rem 0.95rem;
     border-radius: 999px;
-    background: var(--rose-50);
+    background: var(--white);
     border: 1px solid var(--rose-200);
+    box-shadow: 0 2px 6px -2px rgb(138 40 73 / 12%);
     font-size: 0.9rem;
     font-weight: 600;
   }
