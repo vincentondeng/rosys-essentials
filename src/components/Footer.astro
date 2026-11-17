@@ -7,66 +7,76 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container site-footer__grid">
-    <div class="site-footer__brand">
-      <Logo inverse />
-      <p>Ready-packed dignity kits for NGOs, schools, faith-based groups and community organizations.</p>
-      <p class="site-footer__delivery">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-          <path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-          <circle cx="7" cy="17.5" r="1.8" fill="currentColor" />
-          <circle cx="17" cy="17.5" r="1.8" fill="currentColor" />
-        </svg>
-        Delivering across Kenya — all 47 counties
-      </p>
+  <div class="container">
+    <p class="site-footer__statement">Delivering across Kenya, <em>all 47 counties.</em></p>
+
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <Logo inverse />
+        <p>Ready-packed dignity kits for NGOs, schools, faith-based groups and community organizations.</p>
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Pages</h2>
+        <ul class="site-footer__list">
+          <li><a class="link-reveal" href={url('/')}>Home</a></li>
+          <li><a class="link-reveal" href={url('/packages/')}>Packages</a></li>
+          <li><a class="link-reveal" href={url('/how-it-works/')}>How It Works</a></li>
+          <li><a class="link-reveal" href={url('/about/')}>About Us</a></li>
+          <li><a class="link-reveal" href={url('/quote/')}>Request a Quote</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Contact</h2>
+        <dl class="site-footer__contact">
+          <div><dt>Phone</dt><dd><a class="link-reveal" href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a></dd></div>
+          <div><dt>Email</dt><dd><a class="link-reveal" href={`mailto:${site.emailLink}`}>{site.email}</a></dd></div>
+          <div><dt>Office</dt><dd>{site.address}</dd></div>
+          <div><dt>Hours</dt><dd>{site.hours}</dd></div>
+        </dl>
+      </div>
     </div>
 
-    <div>
-      <h2 class="site-footer__heading">Quick links</h2>
-      <ul class="site-footer__list">
-        <li><a href={url('/')}>Home</a></li>
-        <li><a href={url('/packages/')}>Packages</a></li>
-        <li><a href={url('/how-it-works/')}>How It Works</a></li>
-        <li><a href={url('/about/')}>About Us</a></li>
-        <li><a href={url('/quote/')}>Request a Quote</a></li>
-      </ul>
+    <div class="site-footer__bottom">
+      <p>&copy; {year} {site.name}</p>
+      <p>Quote-only pricing · Bulk orders · Custom kits</p>
     </div>
-
-    <div>
-      <h2 class="site-footer__heading">Contact us</h2>
-      <ul class="site-footer__list">
-        <li><a href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a></li>
-        <li><a href={`mailto:${site.emailLink}`}>{site.email}</a></li>
-        <li>{site.address}</li>
-        <li>{site.hours}</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="container site-footer__bottom">
-    <p>&copy; {year} {site.name}. All rights reserved.</p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background: var(--plum-900);
-    color: #eadde5;
-    padding-block: 3rem 5.5rem; /* extra bottom space so the WhatsApp button never covers text */
+    background: var(--ink);
+    color: var(--on-dark-soft);
+    padding-block: clamp(3.5rem, 9vw, 6rem) 6rem; /* extra bottom space so the WhatsApp button never covers text */
     font-size: 0.95rem;
   }
 
   .site-footer a {
-    color: #ffffff;
+    color: var(--on-dark);
   }
 
-  .site-footer a:hover {
-    color: var(--rose-200);
+  .site-footer__statement {
+    margin: 0 0 clamp(2.5rem, 6vw, 4rem);
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+    border-bottom: 1px solid var(--hairline-dark);
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 7vw, 4.5rem);
+    line-height: 0.98;
+    letter-spacing: var(--display-track);
+    color: var(--on-dark);
+    text-wrap: balance;
+  }
+
+  .site-footer__statement em {
+    font-style: italic;
+    color: var(--on-dark-soft);
   }
 
   .site-footer__grid {
     display: grid;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   .site-footer__brand p {
@@ -74,22 +84,14 @@ const year = new Date().getFullYear();
     max-width: 22rem;
   }
 
-  .site-footer__delivery {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    color: #ffffff;
-  }
-
   .site-footer__heading {
-    font-family: var(--font-body);
-    font-weight: 800;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
+    margin: 0 0 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--mono-size);
+    font-weight: 500;
+    letter-spacing: var(--mono-track);
     text-transform: uppercase;
-    color: var(--rose-200);
-    margin-bottom: 0.75rem;
+    color: var(--on-dark-soft);
   }
 
   .site-footer__list {
@@ -97,15 +99,47 @@ const year = new Date().getFullYear();
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 0.5rem;
+    gap: 0.55rem;
+  }
+
+  .site-footer__contact {
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .site-footer__contact div {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .site-footer__contact dt {
+    font-family: var(--font-mono);
+    font-size: var(--mono-size);
+    letter-spacing: var(--mono-track);
+    text-transform: uppercase;
+    padding-top: 0.2em;
+  }
+
+  .site-footer__contact dd {
+    margin: 0;
+    color: var(--on-dark);
     overflow-wrap: anywhere;
   }
 
   .site-footer__bottom {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgb(255 255 255 / 15%);
-    font-size: 0.85rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hairline-dark);
+    font-family: var(--font-mono);
+    font-size: var(--mono-size);
+    letter-spacing: var(--mono-track);
+    text-transform: uppercase;
   }
 
   .site-footer__bottom p {
@@ -113,12 +147,8 @@ const year = new Date().getFullYear();
   }
 
   @media (min-width: 768px) {
-    .site-footer {
-      padding-bottom: 3rem;
-    }
-
     .site-footer__grid {
-      grid-template-columns: 1.4fr 1fr 1.2fr;
+      grid-template-columns: 1.4fr 1fr 1.6fr;
       gap: 3rem;
     }
   }

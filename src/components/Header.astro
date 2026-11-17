@@ -20,7 +20,7 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
       <ul>
         {links.map((link) => (
           <li>
-            <a href={url(link.href)} aria-current={current === url(link.href) ? 'page' : undefined}>{link.label}</a>
+            <a class="link-reveal" href={url(link.href)} aria-current={current === url(link.href) ? 'page' : undefined}>{link.label}</a>
           </li>
         ))}
       </ul>
@@ -32,19 +32,22 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
     <details class="nav-mobile">
       <summary aria-label="Menu">
         <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
-          <path class="icon-open" d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          <path class="icon-close" d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path class="icon-open" d="M3 8h18M3 16h18" stroke="currentColor" stroke-width="1.5" />
+          <path class="icon-close" d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.5" />
         </svg>
         <span class="nav-mobile__label">Menu</span>
       </summary>
       <nav class="nav-mobile__panel" aria-label="Main (mobile)">
-        <ul>
-          {links.map((link) => (
+        <ol>
+          {links.map((link, i) => (
             <li>
-              <a href={url(link.href)} aria-current={current === url(link.href) ? 'page' : undefined}>{link.label}</a>
+              <a href={url(link.href)} aria-current={current === url(link.href) ? 'page' : undefined}>
+                <span class="label" aria-hidden="true">0{i + 1}</span>
+                {link.label}
+              </a>
             </li>
           ))}
-        </ul>
+        </ol>
         <a href={url('/quote/')} class="btn btn--primary btn--block">Request a Quote</a>
       </nav>
     </details>
@@ -56,14 +59,17 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgb(255 255 255 / 96%);
-    border-bottom: 1px solid var(--line);
+    background: var(--linen);
+    border-bottom: 1px solid var(--hairline);
+    container: header / inline-size;
+    overflow-x: clip;
   }
 
   .site-header__inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
     min-height: var(--header-h);
   }
 
@@ -71,32 +77,27 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
     margin-right: auto;
   }
 
-  /* Small phones: compact CTA so logo + quote + menu fit on one row */
   .site-header__cta {
     min-height: 40px;
-    padding: 0.45rem 0.8rem;
+    padding: 0.5rem 0.85rem;
     font-size: 0.85rem;
     white-space: nowrap;
   }
 
   .nav ul,
-  .nav-mobile__panel ul {
+  .nav-mobile__panel ol {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .nav a,
-  .nav-mobile__panel a:not(.btn) {
-    color: var(--plum-900);
-    text-decoration: none;
+  .nav a {
+    font-size: 0.95rem;
     font-weight: 500;
   }
 
-  .nav a[aria-current='page'],
-  .nav-mobile__panel a[aria-current='page'] {
-    color: var(--rose-700);
-    font-weight: 700;
+  .nav a[aria-current='page'] {
+    color: var(--rosehip);
   }
 
   .nav--desktop {
@@ -111,8 +112,8 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: var(--radius-sm);
-    color: var(--plum-900);
+    margin-right: -10px;
+    color: var(--ink);
     cursor: pointer;
   }
 
@@ -142,29 +143,42 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
     left: 0;
     right: 0;
     top: 100%;
-    padding: 0.5rem var(--gutter) 1.25rem;
-    background: var(--white);
-    border-bottom: 1px solid var(--line);
-    box-shadow: var(--shadow);
+    padding: 0.5rem var(--gutter) 1.5rem;
+    background: var(--linen);
+    border-bottom: 1px solid var(--hairline);
   }
 
+  /* Menu reads like a table of contents: mono number, serif title */
   .nav-mobile__panel li a {
-    display: block;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-mobile__panel a[aria-current='page'] {
+    color: var(--rosehip);
   }
 
   .nav-mobile__panel .btn {
-    margin-top: 1rem;
+    margin-top: 1.25rem;
   }
 
-  @media (max-width: 359px) {
+  /* Hide the header CTA when it no longer fits beside the logo and menu, measured in em so
+     it also collapses when the visitor enlarges text. The CTA stays in the menu panel. */
+  @container header (max-width: 21.5em) {
     .site-header__cta {
       display: none;
     }
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 960px) {
     .nav-mobile {
       display: none;
     }
@@ -175,21 +189,17 @@ const current = Astro.url.pathname.replace(/\/?$/, '/');
 
     .nav--desktop ul {
       display: flex;
-      gap: 1.75rem;
-    }
-
-    .nav--desktop a:hover {
-      color: var(--rose-700);
+      gap: 2rem;
     }
 
     .site-header__inner {
-      gap: 1.5rem;
+      gap: 2.5rem;
     }
 
     .site-header__cta {
       min-height: 44px;
-      padding: 0.7rem 1.25rem;
-      font-size: 1rem;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.9rem;
     }
   }
 </style>

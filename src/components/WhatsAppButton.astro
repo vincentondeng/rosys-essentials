@@ -6,12 +6,12 @@ const href = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(sit
 
 <aside aria-label="WhatsApp chat">
 <a class="whatsapp" href={href} target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp (opens in a new tab)">
-  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true" focusable="false">
+  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
     <path
       d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"
       fill="none"
       stroke="currentColor"
-      stroke-width="1.8"
+      stroke-width="1.6"
       stroke-linejoin="round"></path>
     <path
       d="M9.1 7.9c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.4 1 2.8 1.2 3 2 3.2 5 4.3c2.5 1 3 .8 3.5.7.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4l-.5-.3-1.9-.9c-.3-.1-.4-.1-.6.1l-.8 1c-.2.2-.3.2-.6.1a7 7 0 0 1-3.5-3c-.3-.4.3-.4.8-1.4.1-.2 0-.3 0-.5L9.1 8z"
@@ -22,6 +22,7 @@ const href = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(sit
 </aside>
 
 <style>
+  /* Flat and square like the rest of the site: a 1px linen keyline separates it from any background */
   .whatsapp {
     position: fixed;
     right: 1rem;
@@ -29,21 +30,28 @@ const href = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(sit
     z-index: 40;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    min-width: 56px;
-    min-height: 56px;
-    padding: 0.9rem;
-    border-radius: 999px;
+    gap: 0.55rem;
+    min-width: 54px;
+    min-height: 54px;
+    padding: 0.85rem;
+    border-radius: var(--radius);
     background: var(--whatsapp);
-    color: var(--white);
+    outline: 1px solid var(--linen);
+    color: var(--on-whatsapp);
     font-weight: 600;
+    font-size: 0.9rem;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgb(0 0 0 / 22%);
+    transition: background-color var(--dur-fast) var(--ease);
   }
 
   .whatsapp:hover {
-    color: var(--white);
-    filter: brightness(1.08);
+    color: var(--on-whatsapp);
+    background: var(--whatsapp-deep);
+  }
+
+  .whatsapp:focus-visible {
+    outline: 2px solid var(--rosehip);
+    outline-offset: 3px;
   }
 
   .whatsapp__label {
@@ -54,7 +62,7 @@ const href = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(sit
     .whatsapp {
       right: 1.5rem;
       bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
-      padding: 0.8rem 1.2rem 0.8rem 1rem;
+      padding: 0.8rem 1.1rem 0.8rem 0.95rem;
     }
 
     .whatsapp__label {

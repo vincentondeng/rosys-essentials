@@ -1,262 +1,282 @@
 ---
-// Summary cards for the three tiers + Custom Kit. All content comes from src/data/packages.json.
+// Numbered kit index for the Home page: Basic, Essential, Premium + Custom Kit.
+// All content comes from src/data/packages.json.
+// Desktop: hovering or focusing a row shows that kit's plate in the preview column (CSS only, no JavaScript).
+// Phones: each row carries its own small plate, since there is no hover.
 import { url } from '../utils/url';
 import packages from '../data/packages.json';
 
-interface Props {
-  headingLevel?: 'h2' | 'h3';
-}
-const { headingLevel = 'h3' } = Astro.props;
-const Heading = headingLevel;
-
 const tiers = packages.tiers.map((tier) => ({
   ...tier,
-  lines: packages.items
-    .filter((item) => item.key !== 'packaging')
-    .map((item) => ({ label: item.label, value: tier.contents[item.key as keyof typeof tier.contents] }))
+  manifest: packages.items
+    .map((item) => ({ label: item.label, short: item.short, value: tier.contents[item.key as keyof typeof tier.contents] }))
     .filter((line) => line.value),
 }));
 const custom = packages.custom;
+const popular = tiers.find((t) => t.popular) ?? tiers[0];
 ---
 
-<div class="cards">
-  {tiers.map((tier) => (
-    <article class:list={['card', { 'card--popular': tier.popular }]} aria-labelledby={`card-${tier.id}`}>
-      {tier.popular && <p class="card__badge">Most popular</p>}
-      <img class="card__img" src={url(tier.image)} alt={tier.imageAlt} width="480" height="320" loading="lazy" decoding="async" />
-      <div class="card__body">
-        <Heading class="card__title" id={`card-${tier.id}`}>{tier.name}</Heading>
-        <p class="card__best">Best for: <strong>{tier.bestFor}</strong></p>
-        <p class="card__summary">{tier.summary}</p>
-        <ul class="card__list">
-          {tier.lines.map((line) => (
-            <li><span>{line.label}</span> <strong>{line.value}</strong></li>
-          ))}
-        </ul>
-        <p class="card__pack">{tier.contents.packaging}</p>
-        <div class="card__actions">
-          <a class="btn btn--primary btn--block" href={url(`/quote/?package=${tier.id}`)}>
-            Request a Quote<span class="visually-hidden"> for the {tier.name} kit</span>
-          </a>
-          <a class="card__more" href={url(`/packages/#${tier.id}`)}>
-            See full details<span class="visually-hidden"> of the {tier.name} kit</span>
-          </a>
-        </div>
-      </div>
-    </article>
-  ))}
+<div class="kits">
+  <ol class="kits__list">
+    {tiers.map((tier, i) => (
+      <li class:list={['kit', `kit--${tier.id}`]}>
+        <article aria-labelledby={`kit-${tier.id}`}>
+          <p class="kit__num label" aria-hidden="true">0{i + 1}</p>
+          <div class="kit__thumb plate__img">
+            <img src={url(tier.image)} alt="" width="480" height="600" loading="lazy" decoding="async" />
+          </div>
+          <div class="kit__head">
+            <h3 id={`kit-${tier.id}`}>{tier.name}</h3>
+            {tier.popular && <p class="kit__tag label">Most popular</p>}
+            <p class="kit__best">Best for {tier.bestFor.toLowerCase()}</p>
+          </div>
+          <ul class="kit__manifest label" aria-label={`What's inside the ${tier.name} kit`}>
+            {tier.manifest.map((line) => (
+              <li><span class="visually-hidden">{line.label}: </span>{line.short && <span aria-hidden="true">{line.short} </span>}{line.value}</li>
+            ))}
+          </ul>
+          <div class="kit__actions">
+            <a class="btn btn--primary" href={url(`/quote/?package=${tier.id}`)}>
+              Request a Quote<span class="visually-hidden"> for the {tier.name} kit</span>
+            </a>
+            <a class="link-reveal kit__more" href={url(`/packages/#${tier.id}`)}>
+              Full details<span class="visually-hidden"> of the {tier.name} kit</span>
+            </a>
+          </div>
+        </article>
+      </li>
+    ))}
 
-  <article class="card card--custom" aria-labelledby="card-custom">
-    <div class="card__body">
-      <Heading class="card__title" id="card-custom">{custom.name}</Heading>
-      <p class="card__summary">{custom.summary}</p>
-      <ul class="card__ticks">
-        {custom.points.map((point) => <li>{point}</li>)}
-      </ul>
-      <div class="card__actions">
-        <a class="btn btn--secondary btn--block" href={url('/quote/?package=custom')}>Request a Custom Kit</a>
+    <li class="kit kit--custom">
+      <article aria-labelledby="kit-custom">
+        <p class="kit__num label" aria-hidden="true">0{tiers.length + 1}</p>
+        <div class="kit__thumb plate__img">
+          <img src={url(custom.image)} alt="" width="480" height="600" loading="lazy" decoding="async" />
+        </div>
+        <div class="kit__head">
+          <h3 id="kit-custom">{custom.name}</h3>
+          <p class="kit__best">{custom.summary}</p>
+        </div>
+        <ul class="kit__manifest label">
+          {custom.points.map((point) => <li>{point}</li>)}
+        </ul>
+        <div class="kit__actions">
+          <a class="btn btn--outline" href={url('/quote/?package=custom')}>Request a Custom Kit</a>
+        </div>
+      </article>
+    </li>
+  </ol>
+
+  <!-- Desktop preview column: one plate per kit, the hovered or focused row's plate shows -->
+  <div class="kits__preview" aria-hidden="true">
+    <div class="plate">
+      <div class="plate__img kits__stage">
+        {tiers.map((tier) => (
+          <img class:list={['kits__img', `kits__img--${tier.id}`, { 'is-default': tier.id === popular.id }]} src={url(tier.image)} alt="" width="480" height="600" loading="lazy" decoding="async" />
+        ))}
+        <img class="kits__img kits__img--custom" src={url(custom.image)} alt="" width="480" height="600" loading="lazy" decoding="async" />
       </div>
+      <p class="label kits__caption">Placeholder plates · photos to come</p>
     </div>
-  </article>
+  </div>
 </div>
 
 <style>
-  .cards {
-    display: grid;
-    gap: 1.25rem;
-  }
-
-  .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lift);
-  }
-
-  .card--popular {
-    border: 2px solid var(--rose-600);
-    box-shadow: var(--shadow-lift);
-  }
-
-  .card__badge {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    margin: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    z-index: 1;
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-    background: var(--white);
-    color: var(--rose-700);
-    border: 1px solid var(--rose-200);
-    box-shadow: 0 4px 12px -4px rgb(138 40 73 / 30%);
-    font-size: 0.8rem;
-    font-weight: 800;
-  }
-
-  .card__badge::before {
-    content: '';
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50% 0;
-    background: var(--rose-600);
-  }
-
-  /* Shorter images on phones keep the three cards from becoming a long scroll */
-  .card__img {
-    width: 100%;
-    aspect-ratio: 2 / 1;
-    object-fit: cover;
-    background: var(--rose-100);
-  }
-
-  .card__body {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 1.25rem;
-  }
-
-  .card__title {
-    font-size: 1.5rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .card__best {
-    font-size: 0.9rem;
-    color: var(--plum-700);
-    margin-bottom: 0.75rem;
-  }
-
-  .card__summary {
-    margin-bottom: 1rem;
-  }
-
-  .card__list {
+  .kits__list {
     list-style: none;
-    margin: 0 0 0.75rem;
+    margin: 0;
     padding: 0;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid var(--ink);
   }
 
-  .card__list li {
+  .kit {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .kit article {
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr) 5.5rem;
+    grid-template-areas:
+      'num head thumb'
+      'num manifest manifest'
+      'num actions actions';
+    gap: 0.75rem 0.75rem;
+    padding-block: 1.75rem;
+  }
+
+  .kit__num {
+    grid-area: num;
+    margin: 0;
+    padding-top: 0.55rem;
+  }
+
+  .kit__thumb {
+    grid-area: thumb;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--hairline);
+  }
+
+  .kit__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .kit__head {
+    grid-area: head;
+  }
+
+  .kit__head h3 {
+    display: inline;
+    margin: 0;
+    font-size: clamp(2.5rem, 9vw, 4.25rem);
+    line-height: 0.95;
+    letter-spacing: var(--display-track);
+  }
+
+  .kit__tag {
+    display: inline-block;
+    margin: 0 0 0 0.6rem;
+    vertical-align: 0.9em;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid var(--rosehip);
+    color: var(--rosehip);
+  }
+
+  .kit__best {
+    margin: 0.6rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  .kit__manifest {
+    grid-area: manifest;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+  }
+
+  /* Each item wraps as a unit where it can, and only breaks inside when it is longer than the line */
+  .kit__manifest li {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .kit__manifest li:not(:last-child)::after {
+    content: '  ·  ';
+    white-space: pre;
+    color: var(--ink-soft);
+  }
+
+  .kit__actions {
+    grid-area: actions;
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .kit__more {
+    font-weight: 600;
     font-size: 0.95rem;
   }
 
-  .card__list strong {
-    text-align: right;
+  .kits__preview {
+    display: none;
   }
 
-  .card__pack {
-    font-size: 0.9rem;
-    color: var(--plum-700);
-  }
+  @media (min-width: 1024px) {
+    .kits {
+      display: grid;
+      grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+      gap: 3.5rem;
+      align-items: start;
+    }
 
-  .card__ticks {
-    margin: 0 0 1rem;
-    padding: 0;
-    list-style: none;
-  }
+    .kit article {
+      grid-template-columns: 3rem minmax(0, 0.9fr) minmax(0, 1.1fr);
+      grid-template-areas:
+        'num head manifest'
+        'num head actions';
+      gap: 0.5rem 2.5rem;
+      padding-block: 2.25rem;
+    }
 
-  .card__ticks li {
-    position: relative;
-    padding-left: 1.6rem;
-    margin-bottom: 0.5rem;
-  }
+    .kit__thumb {
+      display: none;
+    }
 
-  .card__ticks li::before {
-    content: '';
-    position: absolute;
-    left: 0.2rem;
-    top: 0.35em;
-    width: 0.45rem;
-    height: 0.8rem;
-    border: solid var(--rose-600);
-    border-width: 0 2.5px 2.5px 0;
-    transform: rotate(45deg);
-  }
+    .kit__manifest {
+      padding-top: 0.6rem;
+    }
 
-  .card__actions {
-    margin-top: auto;
-    display: grid;
-    gap: 0.5rem;
-    justify-items: center;
-    padding-top: 0.5rem;
-  }
+    .kit__actions {
+      align-self: end;
+    }
 
-  .card__more {
-    padding: 0.5rem;
-    font-weight: 600;
-  }
+    .kit {
+      transition: background-color var(--dur-fast) var(--ease);
+    }
 
-  .card--custom {
-    background: linear-gradient(135deg, var(--rose-50) 0%, var(--cream) 100%);
-    border: 2px dashed var(--rose-400);
-    box-shadow: none;
-  }
+    .kit:hover,
+    .kit:focus-within {
+      background: var(--parchment);
+    }
 
-  @media (prefers-reduced-motion: reduce) {
-    .card:hover {
+    .kit:hover .kit__head h3,
+    .kit:focus-within .kit__head h3 {
+      font-style: italic;
+    }
+
+    /* Preview column stays in view while the list scrolls */
+    .kits__preview {
+      display: block;
+      position: sticky;
+      top: calc(var(--header-h) + 2rem);
+    }
+
+    .kits__stage {
+      position: relative;
+      aspect-ratio: 4 / 5;
+    }
+
+    .kits__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
+    }
+
+    .kits__img.is-default {
+      opacity: 1;
+      transform: none;
+    }
+
+    .kits__caption {
+      margin: 0.65rem 0 0;
+    }
+
+    /* While any row is hovered or focused, show that row's plate instead of the default */
+    .kits:has(.kit:hover, .kit:focus-within) .kits__img.is-default {
+      opacity: 0;
+    }
+
+    .kits:has(.kit--basic:hover, .kit--basic:focus-within) .kits__img--basic,
+    .kits:has(.kit--essential:hover, .kit--essential:focus-within) .kits__img--essential,
+    .kits:has(.kit--premium:hover, .kit--premium:focus-within) .kits__img--premium,
+    .kits:has(.kit--custom:hover, .kit--custom:focus-within) .kits__img--custom {
+      opacity: 1;
       transform: none;
     }
   }
 
-  @media (min-width: 640px) {
-    .cards {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .card__img {
-      aspect-ratio: 3 / 2;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .cards {
-      grid-template-columns: repeat(3, 1fr);
-      align-items: stretch;
-    }
-
-    /* Custom Kit spans the full row beneath the three tiers */
-    .card--custom {
-      grid-column: 1 / -1;
-    }
-
-    .card--custom .card__body {
-      display: grid;
-      grid-template-columns: 9rem 1fr 1.2fr auto;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .card--custom .card__title,
-    .card--custom .card__summary,
-    .card--custom .card__ticks {
-      margin: 0;
-    }
-
-    .card--custom .card__actions {
-      margin: 0;
-      padding: 0;
-      min-width: 14rem;
+  @media (prefers-reduced-motion: reduce) {
+    .kits__img {
+      transform: none !important;
     }
   }
 </style>

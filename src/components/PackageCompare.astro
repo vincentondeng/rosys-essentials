@@ -12,10 +12,11 @@ const { items, tiers } = packages;
     <thead>
       <tr>
         <th scope="col"><span class="visually-hidden">Item</span></th>
-        {tiers.map((tier) => (
+        {tiers.map((tier, i) => (
           <th scope="col" class:list={{ popular: tier.popular }}>
-            {tier.popular && <span class="compare__badge">Most popular</span>}
+            <span class="compare__num" aria-hidden="true">0{i + 1}</span>
             <span class="compare__name">{tier.name}</span>
+            {tier.popular && <span class="compare__badge">Most popular</span>}
           </th>
         ))}
       </tr>
@@ -28,7 +29,7 @@ const { items, tiers } = packages;
             const value = tier.contents[item.key as keyof typeof tier.contents];
             return (
               <td class:list={{ popular: tier.popular }}>
-                {value ? value : <><span class="compare__none" aria-hidden="true">—</span><span class="visually-hidden">Not included</span></>}
+                {value ? value : <><span class="compare__none" aria-hidden="true">–</span><span class="visually-hidden">Not included</span></>}
               </td>
             );
           })}
@@ -63,16 +64,14 @@ const { items, tiers } = packages;
 <style>
   .compare {
     overflow-x: auto;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--white);
-    box-shadow: var(--shadow);
+    border-top: 1px solid var(--ink);
   }
 
-  /* Phones: compact enough for all three kits to fit side by side at 360px+; scrolls sideways below that */
+  /* Phones: compact enough for all three kits side by side at 360px+; scrolls sideways below that */
   table {
     width: 100%;
-    min-width: 310px;
+    min-width: 300px;
+    table-layout: fixed;
     border-collapse: collapse;
     font-size: 0.8rem;
     line-height: 1.35;
@@ -81,47 +80,66 @@ const { items, tiers } = packages;
 
   th,
   td {
-    padding: 0.6rem 0.3rem;
-    text-align: center;
-    vertical-align: middle;
-    border-bottom: 1px solid var(--line);
+    padding: 0.7rem 0.3rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--hairline);
   }
 
   tbody th {
-    text-align: left;
-    font-weight: 600;
-    color: var(--plum-700);
-    width: 25%;
-    padding-left: 0.65rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    width: 23%;
+    padding-left: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
   }
 
   thead th {
-    padding-top: 1.1rem;
+    padding-block: 1.25rem 1rem;
     vertical-align: bottom;
+    font-weight: 400;
+  }
+
+  .compare__num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--mono-size);
+    letter-spacing: var(--mono-track);
+    color: var(--ink-soft);
+    margin-bottom: 0.35rem;
   }
 
   .compare__name {
     display: block;
     font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--plum-900);
+    font-size: clamp(1.3rem, 4.5vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 
   .compare__badge {
     display: inline-block;
-    margin-bottom: 0.35rem;
-    padding: 0.1rem 0.4rem;
-    border-radius: 999px;
-    background: var(--rose-600);
-    color: var(--white);
-    font-size: 0.65rem;
-    font-weight: 800;
-    white-space: nowrap;
+    margin-top: 0.5rem;
+    padding: 0.05rem 0.35rem;
+    border: 1px solid var(--rosehip);
+    color: var(--rosehip);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
+  /* Most popular column: a parchment band with a rosehip rule on top */
   .popular {
-    background: var(--rose-50);
+    background: var(--parchment);
+  }
+
+  thead th.popular {
+    box-shadow: inset 0 2px 0 var(--rosehip);
   }
 
   td.popular {
@@ -129,11 +147,11 @@ const { items, tiers } = packages;
   }
 
   .compare__none {
-    color: #9a8794;
+    color: var(--ink-soft);
   }
 
   .compare__best {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   /* On phones the detail sections below carry the quote buttons */
@@ -141,32 +159,19 @@ const { items, tiers } = packages;
     display: none;
   }
 
-  .compare__actions td {
-    border-bottom: 0;
-    padding-block: 1.1rem;
-  }
-
-  @media (min-width: 720px) {
+  @media (min-width: 768px) {
     table {
       font-size: 1rem;
     }
 
     th,
     td {
-      padding: 0.9rem 1.1rem;
+      padding: 1rem 1.25rem;
     }
 
     tbody th {
-      padding-left: 1.25rem;
-    }
-
-    .compare__badge {
-      padding: 0.15rem 0.55rem;
-      font-size: 0.75rem;
-    }
-
-    .compare__name {
-      font-size: 1.2rem;
+      font-size: var(--mono-size);
+      padding-left: 0;
     }
 
     .compare__best {
@@ -175,6 +180,11 @@ const { items, tiers } = packages;
 
     .compare__actions {
       display: table-footer-group;
+    }
+
+    .compare__actions td {
+      border-bottom: 0;
+      padding-top: 1.5rem;
     }
   }
 </style>

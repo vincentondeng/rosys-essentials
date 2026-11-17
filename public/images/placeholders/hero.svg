@@ -1,18 +1,15 @@
-<!-- PLACEHOLDER image: replace with a real, compressed (WebP/JPG, ~150 KB) photo of packed kits or a distribution day. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="Placeholder: packed dignity kits">
-  <rect width="600" height="480" rx="24" fill="#f9e4ea"/>
-  <circle cx="470" cy="110" r="70" fill="#f2c9d4"/>
-  <g stroke="#a8345a" stroke-width="3">
-    <rect x="70" y="200" width="170" height="150" rx="18" fill="#ffffff"/>
-    <path d="M70 240h170"/>
-    <rect x="215" y="160" width="190" height="190" rx="20" fill="#fdf3f5"/>
-    <path d="M215 210h190"/>
-    <rect x="380" y="210" width="160" height="140" rx="18" fill="#ffffff"/>
-    <path d="M380 248h160"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" width="480" height="600">
+  <!-- PLACEHOLDER: replace with a real photo (4:5, WebP, under 150 KB). -->
+  <rect width="480" height="600" fill="#e4dfd4"/>
+  <g fill="none" stroke="#1a1816" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.75">
+    <path d="M120 300c0-10 8-18 18-18h96c10 0 18 8 18 18v150c0 14-11 25-25 25h-82c-14 0-25-11-25-25z"/>
+    <path d="M228 270c0-10 8-18 18-18h96c10 0 18 8 18 18v180c0 14-11 25-25 25h-82c-14 0-25-11-25-25z"/>
+    <path d="M120 326h132M228 296h132M150 282c0-16 12-28 26-28s26 12 26 28M258 252c0-16 12-28 26-28s26 12 26 28"/>
   </g>
-  <rect x="137" y="228" width="36" height="24" rx="6" fill="#a8345a"/>
-  <rect x="290" y="196" width="40" height="28" rx="7" fill="#a8345a"/>
-  <rect x="442" y="236" width="36" height="24" rx="6" fill="#a8345a"/>
-  <rect x="50" y="350" width="500" height="10" rx="5" fill="#e8b3c2"/>
-  <text x="300" y="420" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#8a2849">PLACEHOLDER — REPLACE WITH PHOTO</text>
+  <g font-family="ui-monospace, Menlo, monospace" font-size="13" letter-spacing="1.2" fill="#5a534c">
+    <text x="28" y="44">KITS PACKED FOR DISTRIBUTION</text>
+    <text x="28" y="572">PHOTO TO COME</text>
+    <text x="452" y="572" text-anchor="end">4 : 5</text>
+  </g>
+  <path d="M28 56h424M28 548h424" stroke="#1a1816" stroke-opacity="0.18"/>
 </svg>

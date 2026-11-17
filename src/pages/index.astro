@@ -15,7 +15,7 @@ const organization = {
   url: new URL(url('/'), Astro.site).href,
   logo: new URL(url('/apple-touch-icon.png'), Astro.site).href,
   description:
-    'Kenyan supplier of ready-packed dignity kits — sanitary pads, underwear and personal care items — for NGOs, schools and community organizations.',
+    'Kenyan supplier of ready-packed dignity kits (sanitary pads, underwear and personal care items) for NGOs, schools and community organizations.',
   areaServed: { '@type': 'Country', name: 'Kenya' },
   email: site.emailLink,
 };
@@ -29,59 +29,66 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(organization)} />
 
-  <!-- Hero -->
+  <!-- Hero: oversized serif beside a tall framed plate -->
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="eyebrow">Dignity kits supplier · Kenya</p>
-        <h1>Dignity for every woman and girl, <em>delivered reliably.</em></h1>
-        <p class="lead">
-          We supply ready-packed hygiene and personal care kits to NGOs, schools, faith-based groups and community
-          organizations — in the quantities your program needs, delivered anywhere in Kenya.
-        </p>
-        <div class="btn-row">
-          <a class="btn btn--primary" href={url('/quote/')}>Request a Quote</a>
-          <a class="btn btn--secondary" href={url('/packages/')}>View packages</a>
+        <h1>Dignity for every woman and&nbsp;girl, <em>delivered reliably.</em></h1>
+        <div class="hero__sub">
+          <p class="lead">
+            We supply ready-packed hygiene and personal care kits to NGOs, schools, faith-based groups and community
+            organizations, in the quantities your program needs, delivered anywhere in Kenya.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href={url('/quote/')}>
+              Request a Quote
+              <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>
+            </a>
+            <a class="link-reveal hero__link" href={url('/packages/')}>See the kits</a>
+          </div>
         </div>
-        <ul class="hero__facts">
-          <li>Bulk orders with volume pricing</li>
-          <li>Custom kits on request</li>
-          <li>Delivery to all 47 counties</li>
-        </ul>
       </div>
-      <figure class="hero__media">
-        <svg class="hero__blob" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-          <path d="M44 22c30-22 86-24 118 6s40 84 12 120-92 56-130 30S-8 104 6 68s8-24 38-46z" fill="currentColor" />
-        </svg>
-        <img
-          src={url('/images/placeholders/hero.svg')}
-          alt="Placeholder: packed dignity kits ready for distribution"
-          width="600"
-          height="480"
-          fetchpriority="high"
-        />
-      </figure>
+
+      <div class="hero__aside">
+        <figure class="plate hero__plate">
+          <div class="plate__img">
+            <img
+              src={url('/images/placeholders/hero.svg')}
+              alt="Placeholder: packed dignity kits ready for distribution"
+              width="480"
+              height="600"
+              fetchpriority="high"
+            />
+          </div>
+          <figcaption>
+            <span class="label">Plate I</span>
+            <span class="label">Kits ready for distribution</span>
+          </figcaption>
+        </figure>
+        <dl class="ledger hero__ledger">
+          <div><dt>Delivery</dt><dd>All 47 counties</dd></div>
+          <div><dt>Orders</dt><dd>Bulk · priced by quote</dd></div>
+          <div><dt>Custom</dt><dd>Built on request</dd></div>
+        </dl>
+      </div>
     </div>
   </section>
 
   <!-- Who we serve -->
   <section class="serve" aria-labelledby="serve-title">
-    <div class="container">
-      <h2 id="serve-title" class="serve__title">Supplying organizations that serve women and girls</h2>
+    <div class="container serve__inner">
+      <h2 id="serve-title" class="serve__title label">Supplying</h2>
       <ul class="serve__list">
         {audiences.map((a) => <li>{a}</li>)}
       </ul>
     </div>
   </section>
 
-  <!-- Intro -->
+  <!-- Statement -->
   <section class="section">
-    <div class="container intro">
-      <div>
-        <p class="eyebrow">Why it matters</p>
-        <h2>Reliable supply means girls stay in school and women go about their day with confidence.</h2>
-      </div>
-      <div>
+    <div class="container statement">
+      <h2 class="statement__title">Reliable supply means girls stay in school and women go about their day with confidence.</h2>
+      <div class="statement__body">
         <p>
           When a program can count on sanitary pads and basic hygiene items arriving on time, every month, the women and
           girls it serves can count on them too.
@@ -94,14 +101,13 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
     </div>
   </section>
 
-  <!-- Packages summary -->
-  <section class="section section--tint" aria-labelledby="packages-title">
+  <!-- Kits index -->
+  <section class="section section--rule" aria-labelledby="packages-title">
     <div class="container">
-      <div class="section__intro">
-        <p class="eyebrow">Our packages</p>
+      <div class="section-head">
         <h2 id="packages-title">Three ready-made kits, or one built for you</h2>
-        <p>
-          Every kit is sold in bulk with volume-based pricing. Choose a package and request a quote — we'll tailor it to
+        <p class="muted">
+          Every kit is sold in bulk with volume-based pricing. Choose a package and request a quote. We'll tailor it to
           your quantity and delivery location.
         </p>
       </div>
@@ -109,21 +115,15 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
     </div>
   </section>
 
+  <DeliveryBanner />
+
   <!-- Why choose us -->
-  <section class="section" aria-labelledby="why-title">
+  <section class="section section--parchment" aria-labelledby="why-title">
     <div class="container">
-      <div class="section__intro">
-        <p class="eyebrow">Why choose us</p>
+      <div class="section-head">
         <h2 id="why-title">A supplier your program can rely on</h2>
       </div>
       <WhyChooseUs />
-    </div>
-  </section>
-
-  <!-- Delivery -->
-  <section class="section section--tint section--tight">
-    <div class="container">
-      <DeliveryBanner />
     </div>
   </section>
 
@@ -132,144 +132,155 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
 
 <style>
   .hero {
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse 70% 60% at 0% 0%, var(--rose-100) 0%, transparent 70%),
-      linear-gradient(180deg, var(--rose-50) 0%, var(--white) 100%);
-    padding-block: 2.5rem 3rem;
+    padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem);
   }
 
   .hero__inner {
     display: grid;
-    gap: 2rem;
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.75rem;
   }
 
-  .hero__copy .lead {
-    max-width: 36rem;
-    margin-bottom: 1.5rem;
+  .hero h1 {
+    font-size: var(--step-display);
+    margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
   }
 
-  .hero__facts {
-    list-style: none;
-    margin: 1.5rem 0 0;
-    padding: 0;
-    display: grid;
-    gap: 0.4rem;
-    font-size: 0.95rem;
-    color: var(--plum-700);
+  .hero__sub .lead {
+    margin-bottom: 1.75rem;
   }
 
-  .hero__facts li {
-    position: relative;
-    padding-left: 1.5rem;
+  .hero__link {
+    font-weight: 600;
   }
 
-  .hero__facts li::before {
-    content: '';
-    position: absolute;
-    left: 0.25rem;
-    top: 0.3em;
-    width: 0.4rem;
-    height: 0.75rem;
-    border: solid var(--rose-600);
-    border-width: 0 2.5px 2.5px 0;
-    transform: rotate(45deg);
+  .hero__plate img {
+    aspect-ratio: 4 / 5;
   }
 
-  .hero__media {
-    position: relative;
-    margin: 0;
-    padding: 1rem;
-  }
-
-  /* Decorative blush blob sitting behind the photo */
-  .hero__blob {
-    position: absolute;
-    top: -4%;
-    left: -6%;
-    width: 112%;
-    height: 108%;
-    max-width: none;
-    color: var(--rose-200);
-    opacity: 0.7;
-  }
-
-  /* Arch frame: rounded top, softer bottom corners */
-  .hero__media img {
-    position: relative;
-    width: 100%;
-    border-radius: 999px 999px var(--radius) var(--radius) / 40% 40% var(--radius) var(--radius);
-    border: 6px solid var(--white);
-    box-shadow: var(--shadow-lift);
+  .hero__ledger {
+    margin-top: 1.5rem;
   }
 
   .serve {
-    border-block: 1px solid var(--line);
-    padding-block: 1.5rem;
+    border-block: 1px solid var(--hairline);
+    padding-block: 1.1rem;
+  }
+
+  .serve__inner {
+    display: grid;
+    gap: 0.5rem;
   }
 
   .serve__title {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--plum-700);
-    margin-bottom: 0.75rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--mono-size);
+    letter-spacing: var(--mono-track);
+    line-height: 1.5;
   }
 
   .serve__list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    line-height: 1.25;
   }
 
   .serve__list li {
-    padding: 0.4rem 0.95rem;
-    border-radius: 999px;
-    background: var(--white);
-    border: 1px solid var(--rose-200);
-    box-shadow: 0 2px 6px -2px rgb(138 40 73 / 12%);
-    font-size: 0.9rem;
-    font-weight: 600;
+    display: inline;
   }
 
-  .intro {
+  .serve__list li:not(:last-child)::after {
+    content: ' / ';
+    color: var(--rosehip);
+  }
+
+  /* Statement: big serif set off-centre, body text drops into the right-hand column */
+  .statement {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .statement__title {
+    margin: 0;
+    font-size: clamp(2.25rem, 6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: var(--display-track);
+    max-width: 18ch;
+  }
+
+  .statement__body {
+    color: var(--ink-soft);
+    font-size: 1.0625rem;
+    max-width: 32rem;
+  }
+
+  .section-head {
     display: grid;
     gap: 1rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
   }
 
-  .intro h2 {
-    max-width: 30rem;
+  .section-head h2 {
+    margin: 0;
+    max-width: 16ch;
   }
 
-  .intro p {
-    color: var(--plum-700);
-    font-size: 1.05rem;
+  .section-head p {
+    margin: 0;
+    max-width: 32rem;
   }
 
   @media (min-width: 900px) {
-    .hero {
-      padding-block: 4rem 4.5rem;
-    }
-
+    /* Asymmetric split: 7 columns of type, 5 of plate; the headline runs into the plate's margin */
     .hero__inner {
-      grid-template-columns: 1.1fr 1fr;
-      gap: 3.5rem;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 3rem;
+      align-items: start;
     }
 
-    .hero__facts {
-      grid-auto-flow: column;
-      gap: 1.5rem;
+    .hero__copy {
+      position: relative;
+      z-index: 1;
+      padding-top: clamp(1rem, 4vw, 3rem);
     }
 
-    .intro {
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
+    /* Scale with the 7-column text area so the headline sets in three lines at every desktop width */
+    .hero h1 {
+      font-size: clamp(4rem, 7.2vw, 6.5rem);
+      margin-right: -4rem;
+    }
+
+    .hero__sub {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 34rem;
+      margin-left: clamp(0rem, 8vw, 7rem);
+    }
+
+    .serve__inner {
+      grid-template-columns: 7rem minmax(0, 1fr);
+      align-items: baseline;
+      gap: 2rem;
+    }
+
+    .statement {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .statement__title {
+      padding-left: clamp(0rem, 6vw, 5rem);
+    }
+
+    .section-head {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 4rem;
+      align-items: end;
     }
   }
 </style>

@@ -6,15 +6,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Page Not Found" description="The page you were looking for could not be found." noindex>
   <section class="section">
     <div class="container not-found">
-      <p class="eyebrow">Error 404</p>
-      <h1>We couldn't find that page</h1>
-      <p class="lead">The link may be out of date, or the page may have moved. These pages might help:</p>
-      <ul class="ticks">
-        <li><a href={url('/packages/')}>Compare our dignity kit packages</a></li>
-        <li><a href={url('/how-it-works/')}>See how ordering works</a></li>
-        <li><a href={url('/quote/')}>Request a quote</a></li>
-      </ul>
-      <div class="btn-row">
+      <p class="not-found__code" aria-hidden="true">404</p>
+      <div>
+        <h1>We couldn't find that page</h1>
+        <p class="lead">The link may be out of date, or the page may have moved. These pages might help:</p>
+        <ul class="rows not-found__links">
+          <li><a class="link-reveal" href={url('/packages/')}>Compare our dignity kit packages</a></li>
+          <li><a class="link-reveal" href={url('/how-it-works/')}>See how ordering works</a></li>
+          <li><a class="link-reveal" href={url('/quote/')}>Request a quote</a></li>
+        </ul>
         <a class="btn btn--primary" href={url('/')}>Go to the home page</a>
       </div>
     </div>
@@ -23,11 +23,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style>
   .not-found {
-    max-width: 40rem;
-    padding-block: 2rem;
+    display: grid;
+    gap: 1rem;
   }
 
-  .not-found .ticks {
-    margin-bottom: 2rem;
+  .not-found__code {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(7rem, 26vw, 16rem);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    color: var(--rosehip);
+  }
+
+  .not-found h1 {
+    max-width: 12ch;
+  }
+
+  .not-found__links {
+    margin: 2rem 0;
+    max-width: 30rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 900px) {
+    .not-found {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 4rem;
+      align-items: start;
+    }
   }
 </style>

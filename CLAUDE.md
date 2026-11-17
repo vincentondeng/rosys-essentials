@@ -59,9 +59,9 @@ Global: sticky header with logo + nav + "Request a Quote" button; floating Whats
 - Custom kits for specific programs or donors
 
 ## Design
-- Warm, clean, trustworthy. Primary: soft rose/pink. Supporting: white and a deep neutral (plum or charcoal) for text and contrast. Must feel credible to procurement officers — avoid childish or overly "girly" styling.
+- Visual direction (chosen 2026-11-17): "Botanical Apothecary & Editorial Print". Raw linen `#F6F4EF` canvas, parchment `#ECE8DF` surfaces, espresso ink `#1A1816` text, dried-rosehip `#8C2D38` as the only accent. 1px hairlines and tonal shifts for depth, no drop shadows. Instrument Serif headings, Plus Jakarta Sans body, JetBrains Mono labels. Must feel credible to procurement officers, careful rather than luxurious. Full system in `DESIGN.md`.
 - Mobile-first; most visitors will be on phones, often on slower connections. Keep pages light: compress images, no heavy animations, minimal JavaScript.
-- Simple rose-inspired SVG logo placeholder.
+- Simple line-drawn rosehip SVG logo placeholder.
 - Placeholder images for kits and packaging (clearly marked for replacement).
 - Accessible: good color contrast, alt text, labelled form fields, keyboard navigable.
 

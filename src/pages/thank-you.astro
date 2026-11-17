@@ -10,15 +10,15 @@ import site from '../data/site.json';
   <section class="section">
     <div class="container thanks">
       <svg viewBox="0 0 48 48" width="64" height="64" aria-hidden="true" focusable="false">
-        <circle cx="24" cy="24" r="22" fill="var(--rose-50)" stroke="var(--rose-600)" stroke-width="2.5" />
-        <path d="M14 25l7 7 13-15" fill="none" stroke="var(--rose-600)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="24" cy="24" r="22" fill="none" stroke="var(--rosehip)" stroke-width="1.5" />
+        <path d="M14 25l7 7 13-15" fill="none" stroke="var(--rosehip)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
-      <h1>Thank you — your quote request has been sent</h1>
+      <h1>Thank you, your quote request has been sent</h1>
       <p class="lead">We've received your request and will be in touch soon with a tailored quote.</p>
       <p>Need to add something? Call us on <a href={`tel:${site.phoneLink}`}>{site.phoneDisplay}</a>.</p>
       <div class="btn-row">
         <a class="btn btn--primary" href={url('/packages/')}>Back to packages</a>
-        <a class="btn btn--secondary" href={url('/')}>Home</a>
+        <a class="link-reveal thanks__home" href={url('/')}>Home</a>
       </div>
     </div>
   </section>
@@ -26,11 +26,23 @@ import site from '../data/site.json';
 
 <style>
   .thanks {
-    max-width: 40rem;
-    padding-block: 2rem;
+    max-width: 52rem;
   }
 
   .thanks svg {
-    margin-bottom: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .thanks h1 {
+    max-width: 14ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .thanks .btn-row {
+    margin-top: 2rem;
+  }
+
+  .thanks__home {
+    font-weight: 600;
   }
 </style>

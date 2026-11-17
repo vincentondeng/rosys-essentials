@@ -138,15 +138,15 @@ Every placeholder image says **"PLACEHOLDER — REPLACE WITH PHOTO"** on it and 
 | File                | Used on                   | Suggested photo                    |
 | ------------------- | ------------------------- | ---------------------------------- |
 | `hero.svg`          | Home (top)                | Packed kits, or a distribution day |
-| `kit-basic.svg`     | Home cards, Packages      | Basic kit and its contents         |
-| `kit-essential.svg` | Home cards, Packages      | Essential kit                      |
-| `kit-premium.svg`   | Home cards, Packages      | Premium kit in its reusable bag    |
+| `kit-basic.svg`     | Home kit list, Packages   | Basic kit and its contents         |
+| `kit-essential.svg` | Home kit list, Packages   | Essential kit                      |
+| `kit-premium.svg`   | Home kit list, Packages   | Premium kit in its reusable bag    |
 | `kit-custom.svg`    | Packages (Custom Kit)     | A branded or custom kit            |
 | `about-team.svg`    | About Us                  | The team, or a packing day         |
 
 **Keep photos small. Many visitors are on slow mobile connections.**
 
-1. Crop to a **3:2** shape (for example 1200 × 800 px; the hero can be 1200 × 960).
+1. Crop to a **4:5** portrait shape (for example 960 × 1200 px). Every photo on the site sits in a tall framed "plate".
 2. Compress and convert to **WebP** at <https://squoosh.app> (quality about 75). Aim for **under 150 KB** per photo.
 3. Save it in `public/images/` (for example `public/images/kit-essential.webp`).
 4. Point to it:
@@ -156,7 +156,7 @@ Every placeholder image says **"PLACEHOLDER — REPLACE WITH PHOTO"** on it and 
 5. Write a real description in the `alt` text, for example *"Essential kit with two packs of pads, underwear and
    soap"*.
 
-**Logo:** the rose logo is a placeholder drawn in code.
+**Logo:** the rosehip logo is a placeholder drawn in code.
 
 - Site logo: replace the `<svg>` in `src/components/Logo.astro`.
 - Browser tab icon: replace `public/favicon.svg`, `public/favicon-32.png` (32 × 32) and
@@ -276,7 +276,7 @@ Search the project for `REPLACE` to find every remaining placeholder.
 ```
 public/                     Files served as-is
   favicon.svg, favicon-32.png, apple-touch-icon.png, og-image.jpg, robots.txt
-  fonts/                    Self-hosted web fonts (Fraunces for headings, Nunito for body text)
+  fonts/                    Self-hosted web fonts (Instrument Serif, Plus Jakarta Sans, JetBrains Mono)
   images/placeholders/      Placeholder images, to replace before launch
 src/
   data/
@@ -290,11 +290,13 @@ src/
 astro.config.mjs            Site domain + sitemap settings
 ```
 
-**Brand colours** are defined once at the top of `src/styles/global.css` (`--rose-600` for buttons, `--plum-900`
-for text, and so on). If you change them, keep enough contrast for readability. <https://webaim.org/resources/contrastchecker/>
+**Brand colours** are defined once at the top of `src/styles/global.css`: `--linen` (page background),
+`--parchment` (raised sections), `--ink` (text), `--rosehip` (buttons and the one accent colour). The full design
+system, with the rules behind it, is written up in `DESIGN.md`. If you change them, keep enough contrast for readability. <https://webaim.org/resources/contrastchecker/>
 can check a pair of colours.
 
-**Fonts** are Fraunces (headings) and Nunito (body text), both free under the SIL Open Font License. They're stored
+**Fonts** are Instrument Serif (headings), Plus Jakarta Sans (body text) and JetBrains Mono (small labels), all free
+under the SIL Open Font License. They're stored
 in `public/fonts/` so the site never contacts Google, which helps on slow connections. To change them, replace the
 `.woff2` files, update the `@font-face` blocks at the top of `src/styles/global.css` and the two `preload` links in
-`src/layouts/BaseLayout.astro`, and set `--font-display` / `--font-body`.
+`src/layouts/BaseLayout.astro`, and set `--font-display` / `--font-body` / `--font-mono`.

@@ -11,85 +11,58 @@ const {
 ---
 
 <section class="cta" aria-labelledby="cta-title">
-  <svg class="cta__petal" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
-    <path d="M100 10c50 0 90 40 90 90-50 0-90-40-90-90zM100 190c-50 0-90-40-90-90 50 0 90 40 90 90z" fill="currentColor" />
-  </svg>
   <div class="container cta__inner">
-    <div>
-      <h2 id="cta-title">{title}</h2>
+    <h2 id="cta-title">{title}</h2>
+    <div class="cta__side">
       <p>{text}</p>
-    </div>
-    <div class="btn-row">
-      <a class="btn cta__primary" href={url('/quote/')}>Request a Quote</a>
-      <a class="btn cta__secondary" href={url('/packages/')}>Compare packages</a>
+      <div class="btn-row">
+        <a class="btn btn--light" href={url('/quote/')}>
+          Request a Quote
+          <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>
+        </a>
+        <a class="link-reveal cta__secondary" href={url('/packages/')}>Compare packages</a>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .cta {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(120deg, var(--plum-900) 0%, var(--rose-700) 100%);
-    color: var(--white);
-    padding-block: 3.5rem;
-  }
-
-  .cta__petal {
-    position: absolute;
-    right: -2rem;
-    bottom: -3rem;
-    width: 14rem;
-    height: 14rem;
-    color: var(--white);
-    opacity: 0.07;
-    transform: rotate(-15deg);
-  }
-
-  .cta h2 {
-    color: var(--white);
-  }
-
-  .cta p {
-    color: #fbe9ee;
-    max-width: 38rem;
+    background: var(--rosehip);
+    color: var(--on-dark);
+    padding-block: clamp(4rem, 10vw, 7rem);
   }
 
   .cta__inner {
-    position: relative;
     display: grid;
-    gap: 1.25rem;
+    gap: 1.75rem;
   }
 
-  .cta__primary {
-    background: var(--white);
-    color: var(--rose-700);
+  .cta h2 {
+    margin: 0;
+    font-size: var(--step-h1);
+    line-height: var(--display-leading);
+    letter-spacing: var(--display-track);
+    max-width: 13ch;
   }
 
-  .cta__primary:hover {
-    background: var(--rose-50);
-    color: var(--rose-700);
+  .cta p {
+    color: var(--on-rosehip-soft);
+    font-size: 1.1rem;
+    max-width: 30rem;
+    margin-bottom: 1.75rem;
   }
 
   .cta__secondary {
-    border-color: var(--white);
-    color: var(--white);
-  }
-
-  .cta__secondary:hover {
-    background: rgb(255 255 255 / 12%);
-    color: var(--white);
+    color: var(--on-dark);
+    font-weight: 600;
   }
 
   @media (min-width: 900px) {
     .cta__inner {
-      grid-template-columns: 1fr auto;
-      align-items: center;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
       gap: 3rem;
-    }
-
-    .cta p {
-      margin: 0;
+      align-items: end;
     }
   }
 </style>

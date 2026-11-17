@@ -1,12 +1,12 @@
 {
   "_note": "The ONLY place kit contents live. Quantities are placeholders until the owner confirms them. Never add prices here — pricing is quote-only.",
   "items": [
-    { "key": "pads", "label": "Sanitary pads" },
-    { "key": "underwear", "label": "Underwear" },
-    { "key": "soap", "label": "Bathing soap" },
-    { "key": "toothpaste", "label": "Toothpaste" },
-    { "key": "jelly", "label": "Petroleum jelly" },
-    { "key": "packaging", "label": "Packaging" }
+    { "key": "pads", "label": "Sanitary pads", "short": "Pads" },
+    { "key": "underwear", "label": "Underwear", "short": "Underwear" },
+    { "key": "soap", "label": "Bathing soap", "short": "Soap" },
+    { "key": "toothpaste", "label": "Toothpaste", "short": "Toothpaste" },
+    { "key": "jelly", "label": "Petroleum jelly", "short": "Jelly" },
+    { "key": "packaging", "label": "Packaging", "short": "" }
   ],
   "tiers": [
     {
