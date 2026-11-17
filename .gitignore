@@ -3,3 +3,8 @@ dist/
 .astro/
 .DS_Store
 .env
+
+# Local business docs and design-tool cache (keep out of public repo)
+.impeccable/
+rosys-essentials-board-deck.pptx
+rosys-essentials-cost-model.xlsx
