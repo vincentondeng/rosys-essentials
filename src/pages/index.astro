@@ -5,6 +5,7 @@ import PackageCards from '../components/PackageCards.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
 import DeliveryBanner from '../components/DeliveryBanner.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Sprig from '../components/Sprig.astro';
 import site from '../data/site.json';
 
 // Structured data so search engines understand who we are and where we deliver
@@ -33,7 +34,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <h1>Dignity for every woman and&nbsp;girl, <em>delivered reliably.</em></h1>
+        <h1>Dignity for every woman and&nbsp;girl, <em class="swash">delivered reliably.<svg class="swash__line" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 9.5C70 4 160 2.5 296 6.5" /></svg></em></h1>
         <div class="hero__sub">
           <p class="lead">
             We supply ready-packed hygiene and personal care kits to NGOs, schools, faith-based groups and community
@@ -50,6 +51,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
       </div>
 
       <div class="hero__aside">
+        <Sprig />
         <figure class="plate hero__plate">
           <div class="plate__img">
             <img
@@ -144,6 +146,10 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   .hero h1 {
     font-size: var(--step-display);
     margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .hero__aside {
+    position: relative;
   }
 
   .hero__sub .lead {

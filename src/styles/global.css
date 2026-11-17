@@ -64,6 +64,7 @@
   --ink-soft: #5a534c; /* secondary text — 6.9:1 on linen, 6.2:1 on parchment */
   --rosehip: #8c2d38; /* the only accent — 7.5:1 on linen */
   --rosehip-deep: #6e1f29; /* hover / pressed */
+  --ochre: #b8862b; /* dried turmeric: decoration only (strokes, leaves), never text or buttons */
   --on-dark: #f6f4ef; /* text on ink and rosehip fields */
   --on-dark-soft: #c9c2b8; /* secondary text on ink — 10.5:1 */
   --on-rosehip-soft: #f1dcdc; /* secondary text on rosehip — 6.0:1 */
@@ -544,4 +545,27 @@ a:hover > .arrow {
 /* Keep a compound word together across a line break */
 .nowrap {
   white-space: nowrap;
+}
+
+/* Ochre swash: one hand-drawn stroke under an italic accent phrase (decoration only) */
+.swash {
+  position: relative;
+  display: inline-block;
+}
+
+.swash__line {
+  position: absolute;
+  left: 0;
+  bottom: -0.08em;
+  width: 100%;
+  height: 0.16em;
+  overflow: visible;
+}
+
+.swash__line path {
+  fill: none;
+  stroke: var(--ochre);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }

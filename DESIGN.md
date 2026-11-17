@@ -9,6 +9,7 @@ colors:
   ink-soft: "#5a534c"
   rosehip: "#8c2d38"
   rosehip-deep: "#6e1f29"
+  ochre: "#b8862b"
   on-dark-soft: "#c9c2b8"
   on-rosehip-soft: "#f1dcdc"
   rule-strong: "#8a8178"
@@ -102,11 +103,12 @@ Key characteristics: linen ground, espresso ink, one dried-rosehip accent; 1px r
 
 ## Colors
 
-Restrained strategy: tinted neutrals plus one accent, with two committed full-bleed fields (ink and rosehip) that punctuate the scroll.
+Restrained strategy: tinted neutrals plus one accent (and a decoration-only ochre), with two committed full-bleed fields (ink and rosehip) that punctuate the scroll.
 
 - **Linen `#f6f4ef`** is the canvas. **Parchment `#ece8df`** is the one raised surface: alternate sections, plates, bento cells, the popular column of the comparison table.
 - **Ink `#1a1816`** is all primary text (16.1:1 on linen) and the dark field (delivery section, footer). **Ink-soft `#5a534c`** is secondary text and mono labels (6.9:1 on linen, 6.2:1 on parchment). Nothing lighter carries text.
-- **Rosehip `#8c2d38`** is the only accent: primary buttons, the "Most popular" tag, step numerals, the 47 numeral, the closing call-to-action field. Rosehip-deep `#6e1f29` is its hover/pressed state.
+- **Rosehip `#8c2d38`** is the only interactive accent: primary buttons, the "Most popular" tag, step numerals, the 47 numeral, the closing call-to-action field. Rosehip-deep `#6e1f29` is its hover/pressed state.
+- **Ochre `#b8862b`** (dried turmeric, added 2026-11-17) is a decoration-only second ink: the hand-drawn swash under the two italic accent phrases ("delivered reliably." in the hero, "all 47 counties." in the footer) and the leaves of the pressed rosehip sprig (`Sprig.astro`) pinned to the Home hero plate and the About story plate. It never carries text, buttons, links or states (it fails text contrast on linen). Keep it to a few touches per page.
 - On dark fields, text is linen; secondary text is `on-dark-soft #c9c2b8` on ink and `on-rosehip-soft #f1dcdc` on rosehip.
 - **Hairline `rgb(26 24 22 / 14%)`** is decorative only (dividers, grid lines). Form controls use **rule-strong `#8a8178`** (3.5:1) so field edges meet WCAG non-text contrast.
 
@@ -153,5 +155,5 @@ Motion uses one easing, `cubic-bezier(0.22, 1, 0.36, 1)`: 240ms for colour/under
 - **Do** keep every price out of the site; mono is for quantities, counts and counties.
 - **Do** separate with 1px hairlines and tonal surfaces; **don't** add shadows, gradients, glows or pill shapes.
 - **Don't** put a small label or kicker above a heading; numbers and tags go beside or below.
-- **Don't** add a second accent colour or use rosehip for body text blocks.
+- **Don't** add any accent colour beyond rosehip and decoration-only ochre, use ochre for text or controls, or use rosehip for body text blocks.
 - **Do** mark every placeholder (photos, story, testimonials, MOQ) in rosehip mono so it can't pass as real.

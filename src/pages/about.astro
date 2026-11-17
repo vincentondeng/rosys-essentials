@@ -1,4 +1,5 @@
 ---
+import Sprig from '../components/Sprig.astro';
 import { url } from '../utils/url';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -52,6 +53,7 @@ const testimonials = [
   <section class="section" aria-labelledby="story-title">
     <div class="container story">
       <figure class="plate story__plate">
+        <Sprig />
         <div class="plate__img">
           <img
             src={url('/images/placeholders/about-team.svg')}
@@ -157,6 +159,10 @@ const testimonials = [
 
   .story > * {
     min-width: 0;
+  }
+
+  .story__plate {
+    position: relative;
   }
 
   .story__plate img {
