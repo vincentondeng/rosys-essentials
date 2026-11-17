@@ -190,6 +190,7 @@ dd,
 .placeholder-note,
 .delivery__text,
 .matters__close,
+.statement__body p,
 .why__text,
 .cta p {
   text-wrap: balance;
@@ -520,9 +521,9 @@ a:hover > .arrow {
 
 @media (min-width: 900px) {
   .page-head__inner {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 3rem;
-    align-items: end;
+    align-items: start;
   }
 }
 
