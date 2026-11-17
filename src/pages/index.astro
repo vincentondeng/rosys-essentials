@@ -51,8 +51,8 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
       </div>
 
       <div class="hero__aside">
-        <Sprig />
         <figure class="plate hero__plate">
+          <Sprig />
           <div class="plate__img">
             <img
               src={url('/images/placeholders/hero.svg')}
@@ -140,7 +140,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   .hero__inner {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 2.75rem;
+    gap: 3.5rem; /* room for the sprig above the plate on phones */
   }
 
   .hero h1 {
@@ -148,7 +148,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
     margin: 0 0 clamp(1.5rem, 4vw, 2.5rem);
   }
 
-  .hero__aside {
+  .hero__plate {
     position: relative;
   }
 
@@ -250,6 +250,11 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
       position: relative;
       z-index: 1;
       padding-top: clamp(1rem, 4vw, 3rem);
+    }
+
+    /* Clear room above the plate so the sprig never reaches the sticky header */
+    .hero__aside {
+      padding-top: 2.5rem;
     }
 
     /* Scale with the 7-column text area so the headline sets in three lines at every desktop width */

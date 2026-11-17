@@ -156,6 +156,16 @@ Every placeholder image says **"PLACEHOLDER — REPLACE WITH PHOTO"** on it and 
 5. Write a real description in the `alt` text, for example *"Essential kit with two packs of pads, underwear and
    soap"*.
 
+**Hero and team photos: keep the top-right corner plain.** A small drawn rosehip sprig is pinned over the top-right
+corner of these two photos (Home and About Us). Only the tip of its stem crosses onto the photo, and it has a thin
+outline so it stays visible on any background. Still, when choosing and cropping:
+
+- Keep faces, logos and anything important **out of the top-right corner** (roughly the top-right 15% of the photo).
+- A calm corner (a wall, plain backdrop or sky) looks best.
+
+To move or remove the sprig, edit or delete the `<Sprig />` line in `src/pages/index.astro` or
+`src/pages/about.astro`. The drawing itself is in `src/components/Sprig.astro`.
+
 **Logo:** the rosehip logo is a placeholder drawn in code.
 
 - Site logo: replace the `<svg>` in `src/components/Logo.astro`.
