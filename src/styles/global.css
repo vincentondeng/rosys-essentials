@@ -93,6 +93,7 @@
   /* Structure */
   --radius: 2px;
   --container: 1240px;
+  --measure: 38rem;
   --gutter: 1.25rem;
   --space-section: clamp(4rem, 11vw, 8rem);
   --header-h: 4rem;
@@ -182,6 +183,18 @@ blockquote {
   text-wrap: pretty;
 }
 
+/* Short intros, captions and list descriptions: even line lengths, no orphaned last word */
+.lead,
+.muted,
+dd,
+.placeholder-note,
+.delivery__text,
+.matters__close,
+.why__text,
+.cta p {
+  text-wrap: balance;
+}
+
 p {
   margin: 0 0 1rem;
 }
@@ -265,7 +278,7 @@ a:hover {
   font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
   line-height: 1.55;
   color: var(--ink-soft);
-  max-width: 34rem;
+  max-width: var(--measure);
 }
 
 .muted {
@@ -286,7 +299,6 @@ a:hover {
 
 .page-head h1 {
   margin: 0;
-  max-width: 14ch;
 }
 
 .page-head .lead {
@@ -526,4 +538,9 @@ a:hover > .arrow {
   a:hover > .arrow {
     transform: none !important;
   }
+}
+
+/* Keep a compound word together across a line break */
+.nowrap {
+  white-space: nowrap;
 }

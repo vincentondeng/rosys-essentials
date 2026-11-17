@@ -105,7 +105,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   <section class="section section--rule" aria-labelledby="packages-title">
     <div class="container">
       <div class="section-head">
-        <h2 id="packages-title">Three ready-made kits, or one built for you</h2>
+        <h2 id="packages-title">Three <span class="nowrap">ready-made</span> kits, or one built for you</h2>
         <p class="muted">
           Every kit is sold in bulk with volume-based pricing. Choose a package and request a quote. We'll tailor it to
           your quantity and delivery location.
@@ -120,7 +120,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
   <!-- Why choose us -->
   <section class="section section--parchment" aria-labelledby="why-title">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head section-head--solo">
         <h2 id="why-title">A supplier your program can rely on</h2>
       </div>
       <WhyChooseUs />
@@ -206,16 +206,15 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
 
   .statement__title {
     margin: 0;
-    font-size: clamp(2.25rem, 6vw, 4.25rem);
+    font-size: var(--step-h2);
     line-height: 1;
     letter-spacing: var(--display-track);
-    max-width: 18ch;
   }
 
   .statement__body {
     color: var(--ink-soft);
     font-size: 1.0625rem;
-    max-width: 32rem;
+    max-width: var(--measure);
   }
 
   .section-head {
@@ -226,12 +225,11 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
 
   .section-head h2 {
     margin: 0;
-    max-width: 16ch;
   }
 
   .section-head p {
     margin: 0;
-    max-width: 32rem;
+    max-width: var(--measure);
   }
 
   @media (min-width: 900px) {
@@ -257,8 +255,7 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
     .hero__sub {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
-      max-width: 34rem;
-      margin-left: clamp(0rem, 8vw, 7rem);
+      max-width: var(--measure);
     }
 
     .serve__inner {
@@ -273,14 +270,14 @@ const audiences = ['NGOs', 'Schools', 'Faith-based groups', 'Community-based org
       align-items: end;
     }
 
-    .statement__title {
-      padding-left: clamp(0rem, 6vw, 5rem);
-    }
-
     .section-head {
       grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
       gap: 4rem;
       align-items: end;
+    }
+
+    .section-head--solo {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>
